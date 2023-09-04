@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: 'hanja-db'
+    ports:
+      - "${DB_PORT}:3306"
+    env_file: .env
+    environment:
+      MARIADB_AUTO_UPGRADE: "1"
+      MARIADB_INITDB_SKIP_TZINFO: "1"
+      MARIADB_ROOT_PASSWORD: 1111
+      TZ: "Asia/Seoul"
+  server:
+    depends_on:
+      - db
+    container_name: 'hanja-api'
+    image: 'hanja-api'
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    env_file: .env
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./api:/app
+    ports:
+      - 3001:3001
+
