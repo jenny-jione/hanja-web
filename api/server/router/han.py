@@ -1,0 +1,36 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from server.database import get_db
+from server.crud import hanCrud
+
+router_han = APIRouter(
+    prefix='/han',
+    tags=['han api']
+)
+
+
+@router_han.get('/{h_id}')
+def get_h_info(
+    h_id: int,
+    db: Session = Depends(get_db)
+):
+    result = hanCrud.get_han_info(db=db, h_id=h_id)
+    return result
+
+
+@router_han.post('/{h_id}')
+def check_user_input(
+    h_id: int,
+    user_input: str = 't',
+    db: Session = Depends(get_db)
+    # user_id: int
+):
+    # user 정보도 가져와야 하냉 . . . 
+    user_id = 1
+    print(user_input)
+    result = hanCrud.check_input(db, 
+                          h_id=h_id, 
+                          user_input=user_input,
+                          user_id=user_id
+                          )
+    return result
