@@ -5,7 +5,6 @@ import ReactHotKey from 'react-shortcut';
 
 // 상세정보
 const HanInfo = () => {
-    const [info, setInfo] = useState([]);
     const [data, setData] = useState({
         prev_id: null,
         h_info: {},
@@ -23,7 +22,6 @@ const HanInfo = () => {
     const getHanDetail = async () => {
         const result = await getDetail(hid);
         if (typeof result === 'object') {
-            setInfo(result?.data?.info);
             setData(result?.data)
         }
     }
@@ -49,14 +47,9 @@ const HanInfo = () => {
         <div>
             <button onClick={toHomePage}>Home</button>
             <ReactHotKey keys='right' onKeysPressed={() => changePage('next_id')}></ReactHotKey>
-            <div>{info?.id}</div>
-            <div>{info?.hanja}</div>
-            <div>{info?.kor}</div>
-
             <div>{data?.h_info?.id}</div>
-            <div>{data?.hanja}</div>
-            <div>{data?.kor}</div>
-            {/* <div>{data}</div> */}
+            <div>{data?.h_info?.hanja}</div>
+            <div>{data?.h_info?.kor}</div>
             
             {/* <div>
                 <input 
