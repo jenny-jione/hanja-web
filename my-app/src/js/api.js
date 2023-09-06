@@ -25,7 +25,7 @@ export const getList = async (
 ) => {
     try {
         return await axios.get(
-            `/han?page=${page}&size=${limit}`
+            `/han?offset=${page}&limit=${limit}`
         );
     } catch (error) {
         return catchError(error);
