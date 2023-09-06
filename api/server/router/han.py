@@ -36,7 +36,7 @@ def get_h_info(
     next_id = random.randint(1, 1817)
     result = {
         'prev_id': prev_id,
-        'info': h_info,
+        'h_info': h_info,
         'next_id': next_id
     }
     return result
