@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getList } from '../js/api';
 
 const HanList = () => {
@@ -6,7 +7,7 @@ const HanList = () => {
     const [pageInfo, setPageInfo] = useState({
         page: 1,
         totalPage: 1,
-        limit: 20,
+        limit: 30,
         total: 0,
       });
 
@@ -26,11 +27,11 @@ const HanList = () => {
     const renderTableFn = () => {
       return list.map(({ id, hanja, kor, level }) => (
         <tr key={id}>
-            <td>{id}</td>
-            {/* <td>{hanja}</td> */}
-            {/* <td>{kor}</td> */}
-            <td>h</td>
-            <td>k</td>
+        <td>{id}</td>
+        <Link to={`/${id}`} style={{ textDecoration: "none" }}>
+            <td>{hanja}</td>
+        </Link>
+        <td>{kor}</td>
         </tr>
     ));
       };
