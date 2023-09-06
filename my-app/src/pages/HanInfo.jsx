@@ -32,6 +32,10 @@ const HanInfo = () => {
         navigate(`/${data[direction]}`)
     }
 
+    const toHomePage = () => {
+        navigate('/');
+    }
+
 
 
 
@@ -43,6 +47,7 @@ const HanInfo = () => {
 
     return (
         <div>
+            <button onClick={toHomePage}>Home</button>
             <ReactHotKey keys='right' onKeysPressed={() => changePage('next_id')}></ReactHotKey>
             <div>{info?.id}</div>
             <div>{info?.hanja}</div>
