@@ -29,7 +29,16 @@ def get_h_info(
     h_id: int,
     db: Session = Depends(get_db)
 ):
-    result = hanCrud.get_han_info(db=db, h_id=h_id)
+    # 이전 다음 id는 임의로 랜덤으로 ..
+    h_info = hanCrud.get_han_info(db=db, h_id=h_id)
+    import random
+    prev_id = random.randint(1, 1817)
+    next_id = random.randint(1, 1817)
+    result = {
+        'prev_id': prev_id,
+        'info': h_info,
+        'next_id': next_id
+    }
     return result
 
 
