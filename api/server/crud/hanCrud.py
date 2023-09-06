@@ -2,6 +2,11 @@ from server.models import HanTable, GradeTable
 from sqlalchemy.orm import Session
 
 
+def get_han_list(db: Session, limit: int, offset: int):
+    han_list = db.query(HanTable).offset(offset).limit(limit).all()
+    return han_list
+
+
 def get_han_info(db: Session, h_id: int):
     han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
     if not han_info:
