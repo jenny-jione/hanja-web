@@ -9,22 +9,17 @@ router_han = APIRouter(
 )
 
 
-@router_han.get('')
+@router_han.get('/list')
 def get_h_list(
     limit: int = 10,
     offset: int = 0,
     db: Session = Depends(get_db)
-):
-    print(limit, offset)
-    
-    import random
-    offset = random.randint(0, 1807)
-    
+):  
     result = hanCrud.get_han_list(db=db, limit=limit, offset=offset)
     return result
 
 
-@router_han.get('/{h_id}')
+@router_han.get('/detail/{h_id}')
 def get_h_info(
     h_id: int,
     db: Session = Depends(get_db)
@@ -42,8 +37,8 @@ def get_h_info(
     return result
 
 
-@router_han.post('/{h_id}')
-def check_user_input(
+@router_han.post('/test/{h_id}')
+def examine_user_input(
     h_id: int,
     user_input: str = 't',
     db: Session = Depends(get_db)

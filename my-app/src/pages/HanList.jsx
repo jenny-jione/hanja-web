@@ -28,7 +28,7 @@ const HanList = () => {
       return list.map(({ id, hanja, kor, level }) => (
         <tr key={id}>
         <td>{id}</td>
-        <Link to={`/${id}`} style={{ textDecoration: "none" }}>
+        <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
             <td>{hanja}</td>
         </Link>
         <td>{kor}</td>

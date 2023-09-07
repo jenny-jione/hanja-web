@@ -27,11 +27,11 @@ const HanInfo = () => {
     }
 
     const changePage = direction => {
-        navigate(`/${data[direction]}`)
+        navigate(`/detail/${data[direction]}`)
     }
 
     const toHomePage = () => {
-        navigate('/');
+        navigate('/list');
     }
 
 
