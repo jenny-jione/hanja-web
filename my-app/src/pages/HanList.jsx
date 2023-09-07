@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getList } from '../js/api';
+import { useNavigate } from "react-router-dom";
+
 
 const HanList = () => {
     const [list, setList] = useState([]);
     const [pageInfo, setPageInfo] = useState({
-        page: 1,
+        page: 0,
         totalPage: 1,
-        limit: 30,
+        limit: 10,
         total: 0,
       });
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = '홈';
@@ -33,8 +36,21 @@ const HanList = () => {
         </Link>
         <td>{kor}</td>
         </tr>
-    ));
-      };
+        ));
+    };
+
+
+    // 테스트 페이지로 이동
+    const toTestPage = () => {
+        navigate('/test/1');
+    }
+
+
+    // 체크 페이지로 이동
+    const toCheckPage = () => {
+        navigate('/check/1');
+    }
+
 
 
 
@@ -49,7 +65,6 @@ const HanList = () => {
                 <h1>title</h1>
             </div>
             <div className='content'>
-                <div>
                 <table>
                     <thead>
                     <tr>
@@ -60,7 +75,8 @@ const HanList = () => {
                     </thead>
                     <tbody>{renderTableFn()}</tbody>
                 </table>
-                </div>
+                <button onClick={toTestPage}>TEST</button>
+                <button onClick={toCheckPage}>Check</button>
             </div>
         </div>
         </>
