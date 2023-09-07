@@ -10,10 +10,8 @@ const HanInfo = () => {
         h_info: {},
         next_id: null,
     });
-    const [input, setInput] = useState('');
     const { hid } = useParams();
     const navigate = useNavigate();
-    const isinput = 0
 
     useEffect(() => {
         document.title = '상세';
