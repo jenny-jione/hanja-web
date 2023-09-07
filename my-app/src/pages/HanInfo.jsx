@@ -55,6 +55,7 @@ const HanInfo = () => {
                     placeholder="입력"
                     ></input>
             </div> */}
+            <button onClick={() => changePage('next_id')}>Next</button>
         </div>
     )
 
