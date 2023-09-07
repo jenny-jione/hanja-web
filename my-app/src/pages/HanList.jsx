@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getList } from '../js/api';
 import { useNavigate } from "react-router-dom";
+import GlobalStyle from "../component/Background";
+import TemplateBlock from "../component/Template";
+import BasicButton from './BasicButton';
 
 
 const HanList = () => {
@@ -34,25 +37,12 @@ const HanList = () => {
         <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
             <td>{hanja}</td>
         </Link>
-        <td>{kor}</td>
+            <td>{kor}</td>
         </tr>
         ));
     };
 
-
-    // 테스트 페이지로 이동
-    const toTestPage = () => {
-        navigate('/test/1');
-    }
-
-
-    // 체크 페이지로 이동
-    const toCheckPage = () => {
-        navigate('/check/1');
-    }
-
-
-
+    const toHomePage = () => {navigate('/');}
 
     useEffect(() => {
         getHanList();
@@ -60,10 +50,9 @@ const HanList = () => {
 
     return (
         <>
-        <div>
-            <div className='header'>
-                <h1>title</h1>
-            </div>
+        <GlobalStyle />
+        <TemplateBlock>
+            <BasicButton onClick={toHomePage}>Home</BasicButton>
             <div className='content'>
                 <table>
                     <thead>
@@ -75,10 +64,8 @@ const HanList = () => {
                     </thead>
                     <tbody>{renderTableFn()}</tbody>
                 </table>
-                <button onClick={toTestPage}>TEST</button>
-                <button onClick={toCheckPage}>Check</button>
             </div>
-        </div>
+        </TemplateBlock>
         </>
     )
 }

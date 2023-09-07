@@ -6,38 +6,8 @@ import ReactHotKey from 'react-shortcut';
 import styled from "styled-components";
 import GlobalStyle from '../component/Background';
 import TemplateBlock from "../component/Template";
+import BasicButton from "./BasicButton";
 
-
-// pink: background: #f06595;
-// const BasicButton = styled.button`
-//   /* 공통 스타일 */
-//   display: inline-flex;
-//   outline: none;
-//   border: none;
-//   border-radius: 4px;
-//   color: white;
-//   font-weight: bold;
-//   cursor: pointer;
-//   padding-left: 1rem;
-//   padding-right: 1rem;
-
-//   /* 크기 */
-//   height: 30px;
-//   font-size: 1rem;
-
-
-//   /* 기타 */
-//   & + & {
-//     margin-left: 1rem;
-//   }
-// `;
-const BasicButton = styled.button`
-  border: none;
-  height: 30px;
-  font-size: 15px;
-  color: black;
-  background-color: lightgray;
-`;
 
 const HanjaDiv = styled.div`
   padding-top: 20px;
@@ -46,7 +16,7 @@ const HanjaDiv = styled.div`
   h1 {
     text-align: center;
     margin: 0 auto;
-    font-size: 32px;
+    font-size: 150px;
     color: #343a40;
   }
 `;
@@ -60,26 +30,30 @@ const ButtomButton = styled.button`
   position : absolute;
   border: none;
   bottom : 0;
-  height: 30px;
-  font-size: 15px;
+  height: 50px;
+  font-size: 20px;
 `;
 const ShowButton = styled(ButtomButton)`
   width: 100%;
-  color: gray;
-  background-color: lightgray;
+  color: black;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: #91D0D2;
 `;
 
 const YesButton = styled(ButtomButton)`
   left: 0;
   width: 50%;
-  color: gray;
-  background-color: lightgray;
+  color: black;
+  border-bottom-left-radius: 16px;
+  background-color: #91D0D2;
 `;
 const NoButton = styled(ButtomButton)`
   right: 0;
   width: 50%;
-  color: lightgray;
-  background-color: gray;
+  color: black;
+  border-bottom-right-radius: 16px;
+  background-color: #5F9EA0;
 `;
 
 
@@ -143,9 +117,7 @@ const HanCheck = () => {
         }
     }
 
-    const toHomePage = () => {
-        navigate('/list');
-    }
+    const toHomePage = () => {navigate('/');}
 
 
     useEffect(() => {
