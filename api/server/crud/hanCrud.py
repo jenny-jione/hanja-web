@@ -83,12 +83,7 @@ def check_one(ans, res):
     return False
 
 
-def check_input(db: Session, h_id: int, user_input: str, user_id: int):
-    print('h_id:', h_id)
-    h_info = db.query(HanTable).filter(HanTable.id==h_id).first()
-    answer = h_info.kor
-    check_result = check_response(answer=answer, user_response=user_input)
-    
+def update_grade(db: Session, h_id: int, check_result: bool, user_id: int):
     grade_base_q = db.query(GradeTable).filter(GradeTable.h_id==h_id,
                                              GradeTable.user_id==user_id)
     grade_info = grade_base_q.first()
@@ -113,6 +108,15 @@ def check_input(db: Session, h_id: int, user_input: str, user_id: int):
                 user_id=user_id
             )
             db.add(record)
+
+
+def examine_input(db: Session, h_id: int, user_input: str, user_id: int):
+    print('h_id:', h_id)
+    h_info = db.query(HanTable).filter(HanTable.id==h_id).first()
+    answer = h_info.kor
+    check_result = check_response(answer=answer, user_response=user_input)
+    
+    update_grade(db=db, h_id=h_id, check_result=check_result, user_id=user_id)
 
     return check_result
 
