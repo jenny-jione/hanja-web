@@ -47,9 +47,26 @@ def examine_user_input(
     # user 정보도 가져와야 하냉 . . . 
     user_id = 1
     print(user_input)
-    result = hanCrud.check_input(db, 
+    result = hanCrud.examine_input(db, 
                           h_id=h_id, 
                           user_input=user_input,
+                          user_id=user_id
+                          )
+    return result
+
+
+@router_han.post('/check/{h_id}')
+def check_update(
+    h_id: int,
+    check: bool,
+    db: Session = Depends(get_db)
+    # user_id: int
+):
+    # user 정보도 가져와야 하냉 . . . 
+    user_id = 1
+    result = hanCrud.update_check(db, 
+                          h_id=h_id, 
+                          check=check,
                           user_id=user_id
                           )
     return result

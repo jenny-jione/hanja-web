@@ -115,3 +115,8 @@ def check_input(db: Session, h_id: int, user_input: str, user_id: int):
             db.add(record)
 
     return check_result
+
+
+def update_check(db: Session, h_id: int, check: bool, user_id: int):
+    update_grade(db=db, h_id=h_id, check_result=check, user_id=user_id)            
+    return check
