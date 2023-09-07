@@ -25,7 +25,7 @@ export const getList = async (
 ) => {
     try {
         return await axios.get(
-            `/han?offset=${page}&limit=${limit}`
+            `/han/list?offset=${page}&limit=${limit}`
         );
     } catch (error) {
         return catchError(error);
@@ -39,8 +39,46 @@ export const getDetail = async (
 ) => {
     try {
         return await axios.get(
-            `/han/${hid}`
+            `/han/detail/${hid}`
         );
+    } catch (error) {
+        return catchError(error)
+    }
+};
+
+
+// 테스트 화면
+export const getTest = async(
+    hid
+) => {
+    try {
+        return await axios.get(
+            `/han/detail/${hid}`
+        );
+    } catch (error) {
+        return catchError(error)
+    }
+};
+
+
+// 체크 화면
+export const getCheck = async(
+    hid
+) => {
+    try {
+        return await axios.get(
+            `/han/detail/${hid}`
+        );
+    } catch (error) {
+        return catchError(error)
+    }
+};
+
+
+// 사용자 yes/no 결과 업데이트
+export const updateCheck = async(hid, check) => {
+    try {
+        return await axios.post(`/han/check/${hid}?check=${check}`)
     } catch (error) {
         return catchError(error)
     }
