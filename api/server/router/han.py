@@ -46,7 +46,6 @@ def examine_user_input(
 ):
     # user 정보도 가져와야 하냉 . . . 
     user_id = 1
-    print(user_input)
     result = hanCrud.examine_input(db, 
                           h_id=h_id, 
                           user_input=user_input,
