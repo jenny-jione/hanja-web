@@ -75,7 +75,7 @@ export const getCheck = async(
 };
 
 
-// 사용자 yes/no 결과 업데이트
+// 체크 - 사용자 yes/no 결과 업데이트
 export const updateCheck = async(hid, check) => {
     try {
         return await axios.post(`/han/check/${hid}?check=${check}`)
@@ -83,3 +83,14 @@ export const updateCheck = async(hid, check) => {
         return catchError(error)
     }
 };
+
+
+// 테스트 - 사용자 입력 examine해서 정오 결과 리턴받음
+export const examineInput = async(hid, input) => {
+    try {
+        const response = await axios.post(`/han/test/${hid}?user_input=${input}`)
+        return response.data;
+    } catch (error) {
+        return catchError(error)
+    }
+}
