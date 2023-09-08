@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import GlobalStyle from "../component/Background";
-import TemplateBlock from "../component/Template";
-import HomeHeadBlock from "../component/HomeTitle";
-import HomeSelectButton from "../component/HomeButton";
 
+import Button from "react-bootstrap/Button";
+import Container from 'react-bootstrap/Container';
+import CommonNavbar from '../component/RBSNav';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -14,22 +13,31 @@ const Home = () => {
     })
 
     const randomNum = Math.floor(Math.random() * 1817 + 1);
-    const toListPage = () => {navigate('/list');}
     const toCheckPage = () => {navigate(`/check/${randomNum}`);}
     const toTestPage = () => {navigate(`/test/${randomNum}`);}
 
     return (
         <>
-        <GlobalStyle />
-        <TemplateBlock>
-            <HomeHeadBlock>
-                <h1>漢字試驗準備</h1>
-            </HomeHeadBlock>
-            <HomeSelectButton onClick={toListPage}>목록</HomeSelectButton>
-            <HomeSelectButton onClick={toCheckPage}>체크</HomeSelectButton>
-            <HomeSelectButton onClick={toTestPage}>시험</HomeSelectButton>
-        </TemplateBlock>
+        <CommonNavbar/>
+        <br></br>
+        <br></br>
+        <div>
+            <Container className="panel">
+                <div className="d-grid gap-2">
+                    <Button href="/list" variant="light" size="lg">
+                        list
+                    </Button>
+                    <Button onClick={() => toCheckPage()} variant="light" size="lg">
+                        check
+                    </Button>
+                    <Button onClick={() => toTestPage()} variant="light" size="lg">
+                        test
+                    </Button>
+                </div>
+            </Container>
+        </div>
         </>
+
 
     )
 }

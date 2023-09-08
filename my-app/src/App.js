@@ -5,6 +5,7 @@ import HanList from './pages/HanList';
 import HanInfo from './pages/HanInfo';
 import HanTest from './pages/HanTest';
 import HanCheck from './pages/HanCheck';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // JS 파일에 외부 파일을 불러오는 것이기 때문에 "import" 키워드를 사용한다.
 // 같은 JS 파일은 확장자를 사용하지 않는다

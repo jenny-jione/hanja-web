@@ -3,73 +3,13 @@ import { useEffect, useState } from "react";
 import { getCheck, updateCheck } from "../js/api";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactHotKey from 'react-shortcut';
-import styled from "styled-components";
-import GlobalStyle from '../component/Background';
-import TemplateBlock from "../component/Template";
-import BasicButton from "./BasicButton";
 
-
-const HanjaDiv = styled.div`
-  padding-top: 20px;
-  padding-left: 32px;
-  padding-right: 32px;
-  h1 {
-    text-align: center;
-    margin: 0 auto;
-    font-size: 150px;
-    color: #343a40;
-  }
-`;
-
-
-const CenterDiv = styled.div`
-  margin: auto;
-`;
-
-const ButtomButton = styled.button`
-  position : absolute;
-  border: none;
-  bottom : 0;
-  height: 50px;
-  font-size: 20px;
-`;
-const ShowButton = styled(ButtomButton)`
-  width: 100%;
-  color: black;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  background-color: #91D0D2;
-`;
-
-const YesButton = styled(ButtomButton)`
-  left: 0;
-  width: 50%;
-  color: black;
-  border-bottom-left-radius: 16px;
-  background-color: #91D0D2;
-`;
-const NoButton = styled(ButtomButton)`
-  right: 0;
-  width: 50%;
-  color: black;
-  border-bottom-right-radius: 16px;
-  background-color: #5F9EA0;
-`;
-
-
-// const BottomDiv = styled.div`
-//   position: absolute;
-//   bottom: 0;
-// `;
-// const YesButton = styled.button`
-//   width: 50%;
-// `;
-// const NoButton = styled.button`
-//   flex-grow: 1;
-// `;
-
-
-
+import CommonNavbar from "../component/RBSNav";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 
 const HanCheck = () => {
@@ -117,9 +57,6 @@ const HanCheck = () => {
         }
     }
 
-    const toHomePage = () => {navigate('/');}
-
-
     useEffect(() => {
         getHanCheck();
     }, [hid]);
@@ -127,48 +64,54 @@ const HanCheck = () => {
 
     return (
         <>
-        <GlobalStyle />
-        <TemplateBlock>
-            <BasicButton onClick={toHomePage}>Home</BasicButton>
-            {/* <div>{data?.h_info?.id}</div> */}
-            <HanjaDiv>
-                <h1>{data?.h_info?.hanja}</h1>
-            </HanjaDiv>
-            <ReactHotKey keys='Enter' onKeysPressed={() => showAnswer()}></ReactHotKey>
+        <CommonNavbar></CommonNavbar>
+        
+        <ReactHotKey keys='Enter' onKeysPressed={() => showAnswer()}></ReactHotKey>
+        <ReactHotKey keys='1' onKeysPressed={() => postCheck(true)}></ReactHotKey>
+        <ReactHotKey keys='2' onKeysPressed={() => postCheck(false)}></ReactHotKey>
+
+        <Container className="panel">
+            <Row className="justify-content-xs-center">
+                <Col xs="auto">
+                    <h1>{data?.h_info?.hanja}</h1>
+                </Col>
+            </Row>
+            
             {
                 !isShowClicked &&
-                <ShowButton onClick={showAnswer}>show answer</ShowButton>
+                <>
+                <Row><br></br></Row>
+                <Row><br></br></Row>
+                <Row><br></br></Row>
+                </>
             }
-            <CenterDiv>
+            {
+                isShowClicked && 
+                <>
+                <Row>{data?.h_info?.kor}</Row>
+                <Row>{data?.h_info?.radical} : {data?.h_info?.radical_name}</Row>
+                <Row>{data?.h_info?.level}</Row>
+                </>
+            }
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <Row>
                 {
-                    isShowClicked && 
-                    <div>
-                        <div>
-                            {data?.h_info?.kor}
-                        </div>
-                        <div>
-                            ({data?.h_info?.radical} : {data?.h_info?.radical_name})
-                        </div>
-                        <div>
-                            {data?.h_info?.level}
-                        </div>
-                    </div>
+                    !isShowClicked &&
+                    <Button onClick={showAnswer} variant="light" size="lg">
+                        show answer
+                    </Button>
                 }
                 {
                     isShowClicked && !isEventHandled &&
-                    <div>
-                        {/* <button onClick={() => postCheck(true)}>yes</button>
-                        <button onClick={() => postCheck(false)}>no</button> */}
-                        <YesButton onClick={() => postCheck(true)}>yes</YesButton>
-                        <NoButton onClick={() => postCheck(false)}>no</NoButton>
-                    </div>
+                    <>
+                    <ButtonGroup aria-label="Basic example">
+                        <Button onClick={() => postCheck(true)} variant="light">yes</Button>
+                        <Button onClick={() => postCheck(false)} variant="secondary">no</Button>
+                    </ButtonGroup>
+                    </>
                 }
-            </CenterDiv>
-            
-            <ReactHotKey keys='1' onKeysPressed={() => postCheck(true)}></ReactHotKey>
-            <ReactHotKey keys='2' onKeysPressed={() => postCheck(false)}></ReactHotKey>
-
-        </TemplateBlock>
+            </Row>
+        </Container>
         </>
     )
 

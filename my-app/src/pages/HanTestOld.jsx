@@ -8,15 +8,6 @@ import BasicButton from "./BasicButton";
 import HanjaDiv from "../component/TemplateHanjaDiv";
 import CenterDiv from "../component/TemplateBodyDiv";
 
-
-
-import CommonNavbar from "../component/RBSNav";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
 const BottomCenterDiv = styled.div`
     text-align: center;
 `;
@@ -104,19 +95,43 @@ const HanTest = () => {
 
     return (
         <>
-        <CommonNavbar></CommonNavbar>
-
-        <Container className="panel">
-            <Row className="justify-content-xs-center">
-                <Col xs="auto">
-                    {/* <h1>{data?.h_info?.hanja}</h1> */}
-                    {data?.h_info?.hanja}
-                </Col>
-            </Row>
+        <GlobalStyle />
+        <TemplateBlock>
+            <BasicButton onClick={toHomePage}>Home</BasicButton>
+            <HanjaDiv>
+                <h1>{data?.h_info?.hanja}</h1>
+                {/* <h1>h1</h1> */}
+            </HanjaDiv>
+            <CenterDiv>
+                { 
+                    isEntered &&
+                    <div>
+                        <div>
+                            {inputResult}
+                        </div>
+                        <div>
+                            {data?.h_info?.kor}
+                        </div>
+                        {/* <div>
+                            ({data?.h_info?.radical} : {data?.h_info?.radical_name})
+                        </div>
+                        <div>
+                            {data?.h_info?.level}
+                        </div> */}
+                    </div>
+                }
+            </CenterDiv>
             
-           
-        </Container>
-        
+            <BottomCenterDiv>
+                <InputBox 
+                    type='text'
+                    placeholder="입력"
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                    onKeyDown={(e) => activeEnter(e)}
+                    ></InputBox>
+            </BottomCenterDiv>
+        </TemplateBlock>
         </>
     )
 

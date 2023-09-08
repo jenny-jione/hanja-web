@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getList } from '../js/api';
 import { useNavigate } from "react-router-dom";
-import GlobalStyle from "../component/Background";
-import TemplateBlock from "../component/Template";
-import BasicButton from './BasicButton';
-
+import Table from 'react-bootstrap/Table';
+import CommonNavbar from '../component/RBSNav';
 
 const HanList = () => {
     const [list, setList] = useState([]);
@@ -32,17 +29,13 @@ const HanList = () => {
     // 테이블 렌더 함수
     const renderTableFn = () => {
       return list.map(({ id, hanja, kor, level }) => (
-        <tr key={id}>
-        <td>{id}</td>
-        <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
+        <tr>
+            <td>{id}</td>
             <td>{hanja}</td>
-        </Link>
             <td>{kor}</td>
         </tr>
         ));
     };
-
-    const toHomePage = () => {navigate('/');}
 
     useEffect(() => {
         getHanList();
@@ -50,22 +43,17 @@ const HanList = () => {
 
     return (
         <>
-        <GlobalStyle />
-        <TemplateBlock>
-            <BasicButton onClick={toHomePage}>Home</BasicButton>
-            <div className='content'>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>idx</th>
-                        <th>han</th>
-                        <th>kor</th>
-                    </tr>
-                    </thead>
-                    <tbody>{renderTableFn()}</tbody>
-                </table>
-            </div>
-        </TemplateBlock>
+        <CommonNavbar/>
+        <Table striped bordered hover size="sm">
+            <thead>
+            <tr>
+                <th>idx</th>
+                <th>han</th>
+                <th>kor</th>
+            </tr>
+            </thead>
+            <tbody>{renderTableFn()}</tbody>
+        </Table>
         </>
     )
 }
