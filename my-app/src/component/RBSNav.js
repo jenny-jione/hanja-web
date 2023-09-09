@@ -7,7 +7,7 @@ function CommonNavbar() {
     return (
         <Navbar className="justify-content-center" bg="light" data-bs-theme="light">
             <Container>
-                <Navbar.Brand href="/">Navbar</Navbar.Brand>
+                <Navbar.Brand href="/">Home</Navbar.Brand>
             </Container>
         </Navbar>
     );
