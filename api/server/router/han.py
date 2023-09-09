@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from server.database import get_db
 from server.crud import hanCrud
+from server.schema import hanSchema
+from typing import List
 
 router_han = APIRouter(
     prefix='/han',
@@ -9,13 +11,15 @@ router_han = APIRouter(
 )
 
 
-@router_han.get('/list')
+@router_han.get('/list', response_model=List[hanSchema.HanListOut])
 def get_h_list(
+    # sort_key: hanSchema.SortOrder,
     limit: int = 10,
     offset: int = 0,
     db: Session = Depends(get_db)
 ):  
-    result = hanCrud.get_han_list(db=db, limit=limit, offset=offset)
+    sort_key = 'ganada'
+    result = hanCrud.get_han_list(db=db, sort_key=sort_key, limit=limit, offset=offset)
     return result
 
 
