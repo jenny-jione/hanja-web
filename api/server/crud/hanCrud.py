@@ -1,9 +1,37 @@
 from server.models import HanTable, GradeTable
 from sqlalchemy.orm import Session
+from enum import Enum
+from sqlalchemy import func
 
 
-def get_han_list(db: Session, limit: int, offset: int):
+def get_han_list(db: Session, sort_key: Enum, limit: int, offset: int):
     han_list = db.query(HanTable).offset(offset).limit(limit).all()
+    current_user_id = 1 # TODO: 로그인 기능 구현되면 로그인 정보 받아와서 해당하는 user_id로 가져와야 함
+    grade_sub_q = db.query(GradeTable).filter(GradeTable.user_id==current_user_id).subquery()
+
+    han_list = db.query(
+        HanTable.id,
+        HanTable.hanja,
+        HanTable.kor,
+        HanTable.radical,
+        HanTable.radical_name,
+        HanTable.level,
+        func.coalesce(grade_sub_q.c.count, 0).label('count')
+        ).outerjoin(
+            grade_sub_q,
+            grade_sub_q.c.h_id==HanTable.id
+        )
+    if sort_key == 'count_asc':
+        han_list = han_list.order_by(
+            grade_sub_q.c.count.asc()
+        )
+    elif sort_key == 'count_desc':
+        han_list = han_list.order_by(
+            grade_sub_q.c.count.desc()
+        )
+    han_list = han_list.order_by(
+        HanTable.id.asc()
+        ).offset(offset).limit(limit).all()
     return han_list
 
 
