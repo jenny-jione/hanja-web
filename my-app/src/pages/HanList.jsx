@@ -28,11 +28,14 @@ const HanList = () => {
 
     // 테이블 렌더 함수
     const renderTableFn = () => {
-      return list.map(({ id, hanja, kor, level }) => (
+      return list.map(({ id, hanja, kor, radical, radical_name, level, count }) => (
         <tr>
             <td>{id}</td>
             <td>{hanja}</td>
             <td>{kor}</td>
+            <td>{radical} : {radical_name}</td>
+            <td>{level}</td>
+            <td>{count}</td>
         </tr>
         ));
     };
@@ -50,6 +53,9 @@ const HanList = () => {
                 <th>idx</th>
                 <th>han</th>
                 <th>kor</th>
+                <th>radical</th>
+                <th>level</th>
+                <th>count</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>
