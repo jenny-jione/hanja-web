@@ -70,11 +70,13 @@ const HanCheck = () => {
         <ReactHotKey keys='1' onKeysPressed={() => postCheck(true)}></ReactHotKey>
         <ReactHotKey keys='2' onKeysPressed={() => postCheck(false)}></ReactHotKey>
 
-        <Container className="panel">
-            <Row className="justify-content-xs-center">
-                <Col xs="auto">
+        <Container>
+            <Row>
+                <div className="text-center">
                     <h1>{data?.h_info?.hanja}</h1>
-                </Col>
+                </div>
+            </Row>
+            <Row>
             </Row>
             
             {
@@ -88,9 +90,17 @@ const HanCheck = () => {
             {
                 isShowClicked && 
                 <>
-                <Row>{data?.h_info?.kor}</Row>
-                <Row>{data?.h_info?.radical} : {data?.h_info?.radical_name}</Row>
-                <Row>{data?.h_info?.level}</Row>
+                <Row className="text-center">
+                    <div>
+                        {data?.h_info?.kor}
+                    </div>
+                    <div>
+                        {data?.h_info?.radical} : {data?.h_info?.radical_name}
+                    </div>
+                    <div>
+                        {data?.h_info?.level}
+                    </div>    
+                </Row>
                 </>
             }
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
