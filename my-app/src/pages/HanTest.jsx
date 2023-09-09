@@ -16,6 +16,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Form from 'react-bootstrap/Form';
+
 
 const BottomCenterDiv = styled.div`
     text-align: center;
@@ -58,17 +60,15 @@ const HanTest = () => {
             setEnterCount(0);
         }
     }
-    
+
     // 엔터키 감지
-    const activeEnter = (e) => {
-        if(e.key === "Enter") {
-            postCheck();
-            setEnterCount((cnt) => cnt + 1);
-            console.log(`${inputText} 입력 완료 :: ${enterCount}`);
-            if (enterCount > 0) {
-                changePage('next_id');
-                setInputText('');
-            }
+    const handleSubmit = (e) => {
+        e.preventDefault();        
+        postCheck();
+        setEnterCount((cnt) => cnt + 1);
+        if (enterCount > 0) {
+            changePage('next_id');
+            setInputText('');
         }
       }
 
@@ -106,14 +106,52 @@ const HanTest = () => {
         <>
         <CommonNavbar></CommonNavbar>
 
-        <Container className="panel">
-            <Row className="justify-content-xs-center">
-                <Col xs="auto">
-                    {/* <h1>{data?.h_info?.hanja}</h1> */}
-                    {data?.h_info?.hanja}
-                </Col>
+        <Container>
+            <Row>
+                <div className="text-center">
+                    <h1>{data?.h_info?.hanja}</h1>
+                </div>
             </Row>
-            
+            <Row>
+                {
+                    !isEntered &&
+                    <>
+                    <Row><br></br></Row>
+                    <Row><br></br></Row>
+                    <Row><br></br></Row>
+                    <Row><br></br></Row>
+                    </>
+                }
+            </Row>
+            <Row className="text-center">
+                { 
+                    isEntered &&
+                    <div>
+                        <div>
+                            {inputResult}
+                        </div>
+                        <div>
+                            {data?.h_info?.kor}
+                        </div>
+                        <div>
+                            ({data?.h_info?.radical} : {data?.h_info?.radical_name})
+                        </div>
+                        <div>
+                            {data?.h_info?.level}
+                        </div>
+                    </div>
+                }
+            </Row>
+
+            <Form onSubmit={handleSubmit}>
+                <Form.Control 
+                    type="text" 
+                    placeholder="" 
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
+                />
+            </Form>
+
            
         </Container>
         
