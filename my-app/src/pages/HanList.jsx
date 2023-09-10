@@ -28,8 +28,11 @@ const HanList = () => {
 
     // 테이블 렌더 함수
     const renderTableFn = () => {
+        const handleRowClick = (id) => {
+            navigate(`/check/${id}`)
+        }
       return list.map(({ id, hanja, kor, radical, radical_name, level, count }) => (
-        <tr>
+        <tr onClick={() => handleRowClick(id)}>
             <td>{id}</td>
             <td>{hanja}</td>
             <td>{kor}</td>
@@ -60,7 +63,7 @@ const HanList = () => {
             </thead>
             <tbody>{renderTableFn()}</tbody>
         </Table>
-        </>
+                </>
     )
 }
 
