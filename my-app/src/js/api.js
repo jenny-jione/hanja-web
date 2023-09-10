@@ -53,7 +53,7 @@ export const getTest = async(
 ) => {
     try {
         return await axios.get(
-            `/han/detail/${hid}`
+            `/han/shuffle/${hid}`
         );
     } catch (error) {
         return catchError(error)
@@ -67,7 +67,7 @@ export const getCheck = async(
 ) => {
     try {
         return await axios.get(
-            `/han/detail/${hid}`
+            `/han/shuffle/${hid}`
         );
     } catch (error) {
         return catchError(error)

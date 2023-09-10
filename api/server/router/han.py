@@ -31,6 +31,19 @@ def get_h_list(
 @router_han.get('/detail/{h_id}')
 def get_h_info(
     h_id: int,
+    # filter: str,
+    db: Session = Depends(get_db)
+):
+    h_info = hanCrud.get_han_info_with_prev_next(db=db, filter='a', h_id=h_id)
+    result = {
+        'h_info': h_info,
+    }
+    return result
+
+
+@router_han.get('/shuffle/{h_id}')
+def get_h_info_shuffle(
+    h_id: int,
     db: Session = Depends(get_db)
 ):
     # 이전 다음 id는 임의로 랜덤으로 ..
