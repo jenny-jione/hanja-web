@@ -43,6 +43,13 @@ def get_han_list(db: Session,
     return han_list
 
 
+def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
+    han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
+    if not han_info:
+        return False
+    return han_info
+
+
 def get_han_info(db: Session, h_id: int):
     han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
     if not han_info:
