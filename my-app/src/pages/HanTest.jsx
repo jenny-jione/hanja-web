@@ -1,37 +1,13 @@
 import { useEffect, useState } from "react";
 import { getTest, examineInput } from "../js/api";
 import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import GlobalStyle from '../component/Background';
-import TemplateBlock from "../component/Template";
-import BasicButton from "./BasicButton";
-import HanjaDiv from "../component/TemplateHanjaDiv";
-import CenterDiv from "../component/TemplateBodyDiv";
-
-
-
 import CommonNavbar from "../component/RBSNav";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Form from 'react-bootstrap/Form';
 
 
-const BottomCenterDiv = styled.div`
-    text-align: center;
-`;
-
-const InputBox = styled.input`
-	width: 70%;
-    height: 30px;
-	border: 1px solid #91D0D2;
-	border-radius: 16px;
-    bottom: 0;
-    text-align: center;
-	outline: none;
-`;
 
 // 시험
 const HanTest = () => {
