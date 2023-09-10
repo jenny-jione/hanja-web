@@ -4,8 +4,11 @@ from enum import Enum
 from sqlalchemy import func
 
 
-def get_han_list(db: Session, sort_key: Enum, limit: int, offset: int):
-    han_list = db.query(HanTable).offset(offset).limit(limit).all()
+def get_han_list(db: Session,
+                 search: str,
+                 sort_key: Enum, 
+                 limit: int, 
+                 offset: int):
     current_user_id = 1 # TODO: 로그인 기능 구현되면 로그인 정보 받아와서 해당하는 user_id로 가져와야 함
     grade_sub_q = db.query(GradeTable).filter(GradeTable.user_id==current_user_id).subquery()
 
@@ -21,6 +24,11 @@ def get_han_list(db: Session, sort_key: Enum, limit: int, offset: int):
             grade_sub_q,
             grade_sub_q.c.h_id==HanTable.id
         )
+    if search:
+        han_list = han_list.filter(HanTable.kor.like(f'%{search}%'))
+    
+    total_count = han_list.count()
+    print(total_count)
     if sort_key == 'count_asc':
         han_list = han_list.order_by(
             grade_sub_q.c.count.asc()

@@ -14,12 +14,17 @@ router_han = APIRouter(
 @router_han.get('/list', response_model=List[hanSchema.HanListOut])
 def get_h_list(
     # sort_key: hanSchema.SortOrder,
+    search: str = None,
     limit: int = 10,
     offset: int = 0,
     db: Session = Depends(get_db)
 ):  
     sort_key = 'ganada'
-    result = hanCrud.get_han_list(db=db, sort_key=sort_key, limit=limit, offset=offset)
+    result = hanCrud.get_han_list(db=db, 
+                                  search=search,
+                                  sort_key=sort_key, 
+                                  limit=limit, 
+                                  offset=offset)
     return result
 
 
