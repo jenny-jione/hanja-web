@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getDetail } from "../js/api";
 import { useParams, useNavigate } from "react-router-dom";
-import ReactHotKey from 'react-shortcut';
-import GlobalStyle from "../component/Background";
-import TemplateBlock from "../component/Template";
-import BasicButton from './BasicButton';
+import CommonNavbar from "../component/RBSNav";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 
 // 상세정보
@@ -46,23 +48,43 @@ const HanInfo = () => {
 
 
     return (
+
         <>
-        <GlobalStyle />
-        <TemplateBlock>
-            <BasicButton onClick={toHomePage}>Home</BasicButton>
-                <ReactHotKey keys='right' onKeysPressed={() => changePage('next_id')}></ReactHotKey>
-                <div>{data?.h_info?.id}</div>
-                <div>{data?.h_info?.hanja}</div>
-                <div>{data?.h_info?.kor}</div>
-                
-                {/* <div>
-                    <input 
-                        type='text'
-                        placeholder="입력"
-                        ></input>
-                </div> */}
-                <button onClick={() => changePage('next_id')}>Next</button>
-        </TemplateBlock>
+        <CommonNavbar></CommonNavbar>
+        <Container>
+            <Row>
+                <div className="text-center">
+                    <h1>{data?.h_info?.hanja}</h1>
+                </div>
+            </Row>
+            <Row>
+            </Row>
+            
+            <>
+            <Row className="text-center">
+                <div>
+                    {data?.h_info?.kor}
+                </div>
+                <div>
+                    {data?.h_info?.radical} : {data?.h_info?.radical_name}
+                </div>
+                <div>
+                    {data?.h_info?.level}
+                </div>    
+            </Row>
+            </>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <Row>
+                {
+                    <>
+                    <ButtonGroup aria-label="Basic example">
+                        <Button variant="light">prev</Button>
+                        <Button variant="secondary">next</Button>
+                    </ButtonGroup>
+                    </>
+                }
+            </Row>
+        </Container>
         </>
         
     )
