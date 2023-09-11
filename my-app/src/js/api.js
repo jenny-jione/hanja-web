@@ -22,11 +22,12 @@ const catchError = async error => {
 // 리스트 불러오기
 export const getList = async (
     { page, limit },
-    searchText
+    searchText,
+    sortOrder
 ) => {
     try {
         return await axios.get(
-            `/han/list?page=${page}&limit=${limit}&search=${searchText}`
+            `/han/list?page=${page}&limit=${limit}&search=${searchText}&sort_key=${sortOrder}`
         );
     } catch (error) {
         return catchError(error);
