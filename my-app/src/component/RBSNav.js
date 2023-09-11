@@ -25,6 +25,7 @@ function CommonNavbar() {
                     <Col xs="auto">
                         <Button onClick={() => {
                             removeCookie('myToken', {path:'/'});
+                            removeCookie('userInfo', {path:'/'});
                             return navigate('/');
                         }} variant="secondary">Logout</Button>
                     </Col>
