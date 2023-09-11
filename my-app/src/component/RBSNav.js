@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { removeCookie } from '../js/cookie';
+import { getCookie, removeCookie } from '../js/cookie';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -17,6 +17,9 @@ function CommonNavbar() {
                 <Navbar.Brand href="/home">Home</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/list">list</Nav.Link>
+                </Nav>
+                <Nav>
+                    <Nav.Link>{getCookie('userInfo')}</Nav.Link>
                 </Nav>
                 <Row>
                     <Col xs="auto">
