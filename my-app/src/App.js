@@ -14,8 +14,6 @@ import './App.css';
 const App = () => {
   return (
     <div>
-      {/* <button onClick={toListPage}>LIST</button>
-      <button>TEST</button> */}
       <Router>
         <Routes>
           <Route path='/' element={<Home/>}/>
