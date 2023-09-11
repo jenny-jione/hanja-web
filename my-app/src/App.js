@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; // 리액트를 구현할 수 있는 플러그인을 연결
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
 import Home from './pages/Home';
 import HanList from './pages/HanList';
 import HanInfo from './pages/HanInfo';
@@ -16,7 +17,8 @@ const App = () => {
     <div>
       <Router>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Login/>}></Route>
+          <Route path='/home' element={<Home/>}/>
           <Route path='/list' element={<HanList/>}/>
           <Route path='/detail/:hid' element={<HanInfo/>}/>
           <Route path='/test/:hid' element={<HanTest/>}/>

@@ -19,6 +19,19 @@ const catchError = async error => {
   };
 
 
+export const signIn = async (id, pw) => {
+    try {
+        return await axios.post(
+            `/han/login`,
+            `grant_type=&username=${id}&password=${pw}&scope=&client_id=&client_secret=`,
+            { 'Content-Type': 'application/x-www-form-urlencoded' }
+        );
+    } catch (error) {
+        return catchError(error);
+    }
+};
+
+
 // 리스트 불러오기
 export const getList = async (
     { page, limit },
