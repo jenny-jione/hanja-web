@@ -25,7 +25,7 @@ const HanList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        document.title = '홈';
+        document.title = '리스트';
     });
 
     // 텍스트 리스트
