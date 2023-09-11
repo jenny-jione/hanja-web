@@ -1,6 +1,6 @@
 import Pagination from 'react-bootstrap/Pagination';
 
-function AdvancedExample() {
+function PaginationComponent() {
   return (
     <Pagination>
       <Pagination.First />
@@ -22,4 +22,4 @@ function AdvancedExample() {
   );
 }
 
-export default AdvancedExample;
+export default PaginationComponent;
