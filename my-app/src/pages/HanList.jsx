@@ -9,6 +9,7 @@ import CommonNavbar from '../component/RBSNav';
 
 const HanList = () => {
     const [list, setList] = useState([]);
+    const [userInput, setUserInput] = useState('');
     const [searchText, setSearchText] = useState('');
     const [pageInfo, setPageInfo] = useState({
         page: 1,
@@ -30,16 +31,15 @@ const HanList = () => {
         }
     }
 
-    // TODO: 문제 해결하기 => 최초 1번은 검색이 되는데, 그 후에는 엔터를 눌러도 api 요청이 가지 않음. 왜??
-    // 그리고 page:0으로 하면 애초에 최초에도 검색이 안됨. 처음에 설정한 pageInfo값과 값이 같으면 요청이 가지 않는 것 같음. 이유 찾기
-    const handelSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();        
-        console.log(searchText);
+        setSearchText(userInput);
         setPageInfo({
             page: 1,
             limit: 10,
         })
     }
+
 
     // 테이블 렌더 함수
     const renderTableFn = () => {
@@ -60,21 +60,21 @@ const HanList = () => {
 
     useEffect(() => {
         getHanList();
-      }, [pageInfo.page, pageInfo.limit]);
+      }, [pageInfo.page, pageInfo.limit, searchText]);
 
     return (
         <>
         <CommonNavbar/>
-        <Form onSubmit={handelSubmit}>
+        <Form onSubmit={handleSubmit}>
             <InputGroup className="mb-3">
                 <Form.Control
                     placeholder="Input word"
-                    aria-label="Recipient's username"
+                    aria-label="User Input"
                     aria-describedby="basic-addon2"
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
                 />
-                <Button variant="outline-secondary" id="button-addon2">
+                <Button type="submit" variant="outline-secondary" id="button-addon2">
                 Search
                 </Button>
             </InputGroup>
