@@ -26,7 +26,7 @@ export const getList = async (
 ) => {
     try {
         return await axios.get(
-            `/han/list?offset=${page}&limit=${limit}&search=${searchText}`
+            `/han/list?page=${page}&limit=${limit}&search=${searchText}`
         );
     } catch (error) {
         return catchError(error);

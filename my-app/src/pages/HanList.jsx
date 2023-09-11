@@ -11,7 +11,7 @@ const HanList = () => {
     const [list, setList] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [pageInfo, setPageInfo] = useState({
-        page: 0,
+        page: 1,
         totalPage: 1,
         limit: 10,
         total: 0,
@@ -36,7 +36,7 @@ const HanList = () => {
         e.preventDefault();        
         console.log(searchText);
         setPageInfo({
-            page: 0,
+            page: 1,
             limit: 10,
         })
     }

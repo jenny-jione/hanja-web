@@ -40,7 +40,7 @@ def get_han_list(db: Session,
     han_list = han_list.order_by(
         HanTable.id.asc()
         ).offset(offset).limit(limit).all()
-    return han_list
+    return total_count, han_list
 
 
 def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):

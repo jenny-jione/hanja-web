@@ -15,16 +15,20 @@ router_han = APIRouter(
 def get_h_list(
     # sort_key: hanSchema.SortOrder,
     search: str = None,
+    page: int = 1,
     limit: int = 10,
-    offset: int = 0,
     db: Session = Depends(get_db)
 ):  
+    offset = (page - 1) * limit
     sort_key = 'ganada'
-    result = hanCrud.get_han_list(db=db, 
-                                  search=search,
-                                  sort_key=sort_key, 
-                                  limit=limit, 
-                                  offset=offset)
+    total_count, result = hanCrud.get_han_list(db=db, 
+                                               search=search,
+                                               sort_key=sort_key, 
+                                               limit=limit, 
+                                               offset=offset)
+    total_page = total_count // limit
+    if total_count % limit != 0:
+        total_page += 1
     return result
 
 
