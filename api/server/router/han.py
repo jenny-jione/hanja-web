@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from server.database import get_db
 from server.crud import hanCrud
-from server.schema import hanSchema
+from server.schema import hanSchema, baseSchema
 from typing import List
 
 router_han = APIRouter(
@@ -11,16 +11,16 @@ router_han = APIRouter(
 )
 
 
-@router_han.get('/list', response_model=List[hanSchema.HanListOut])
+@router_han.get('/list', response_model=baseSchema.Response[List[hanSchema.HanListOut]])
 def get_h_list(
-    # sort_key: hanSchema.SortOrder,
+    sort_key: hanSchema.SortOrder = None,
     search: str = None,
     page: int = 1,
     limit: int = 10,
     db: Session = Depends(get_db)
 ):  
     offset = (page - 1) * limit
-    sort_key = 'ganada'
+    limit = 1817
     total_count, result = hanCrud.get_han_list(db=db, 
                                                search=search,
                                                sort_key=sort_key, 
@@ -29,12 +29,20 @@ def get_h_list(
     total_page = total_count // limit
     if total_count % limit != 0:
         total_page += 1
-    return result
+    return baseSchema.Response().metadata(
+        totalCount=total_count,
+        page=page,
+        totalPage=total_page,
+        offset=offset,
+        limit=limit
+    ).successfulResponse(result)
+
 
 
 @router_han.get('/detail/{h_id}')
 def get_h_info(
     h_id: int,
+    search: str = None,
     # filter: str,
     db: Session = Depends(get_db)
 ):
