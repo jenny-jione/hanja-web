@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getList } from '../js/api';
 import { useNavigate } from "react-router-dom";
+import CommonNavbar from '../component/RBSNav';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Table from 'react-bootstrap/Table';
-import CommonNavbar from '../component/RBSNav';
 
 const HanList = () => {
     const [list, setList] = useState([]);
@@ -17,6 +20,8 @@ const HanList = () => {
         limit: 10,
         total: 0,
       });
+    const [ totalCount, setTotalCount ] = useState('');
+    const [ sortOrder, setSortOrder ] = useState('ganada');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,9 +30,10 @@ const HanList = () => {
 
     // 텍스트 리스트
     const getHanList = async () => {
-        const result = await getList(pageInfo, searchText);
+        const result = await getList(pageInfo, searchText, sortOrder);
         if (typeof result === 'object') {
-            setList(result?.data);
+            setList(result?.data?.data);
+            setTotalCount(result?.data?.meta?.totalCount);
         }
     }
 
@@ -46,21 +52,21 @@ const HanList = () => {
         const handleRowClick = (id) => {
             navigate(`/detail/${id}`)
         }
-      return list.map(({ id, hanja, kor, radical, radical_name, level, count }) => (
-        <tr key={id} onClick={() => handleRowClick(id)}>
-            <td>{id}</td>
-            <td>{hanja}</td>
-            <td>{kor}</td>
-            <td>{radical} : {radical_name}</td>
-            <td>{level}</td>
-            <td>{count}</td>
-        </tr>
+        return list.map(({ id, hanja, kor, radical, radical_name, level, count }, index) => (
+            <tr key={id} onClick={() => handleRowClick(id)}>
+                <td>{index+1}</td>
+                <td>{hanja}</td>
+                <td>{kor}</td>
+                <td>{radical} : {radical_name}</td>
+                <td>{level}</td>
+                <td>{count}</td>
+            </tr>
         ));
     };
 
     useEffect(() => {
         getHanList();
-      }, [pageInfo.page, pageInfo.limit, searchText]);
+      }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
 
     return (
         <>
@@ -80,20 +86,30 @@ const HanList = () => {
             </InputGroup>
         </Form>
 
+        <Container>
+            <Row>
+                <Col>
+                    <div className="text-center">
+                        {totalCount}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+
         <Table striped bordered hover size="sm">
             <thead>
             <tr>
                 <th>idx</th>
                 <th>han</th>
-                <th>kor</th>
+                <th onClick={() => setSortOrder('ganada')}>kor</th>
                 <th>radical</th>
                 <th>level</th>
-                <th>count</th>
+                <th onClick={() => setSortOrder('count_desc')}>count</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>
         </Table>
-                </>
+        </>
     )
 }
 
