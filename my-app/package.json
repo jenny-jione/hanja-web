@@ -15,6 +15,7 @@
     "react-scripts": "5.0.1",
     "react-shortcut": "^2.0.9",
     "styled-components": "^6.0.7",
+    "universal-cookie": "^6.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
