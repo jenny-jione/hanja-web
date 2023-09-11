@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from sqlalchemy import event, DDL
+from server.router.user import router_user
 from server.router.han import router_han
 from server.router.ini import router_ini
 from .models import UserTable
@@ -19,6 +20,7 @@ def get_server():
         docs_url="/docs",
         redoc_url=None
     )
+    server.include_router(router_user)
     server.include_router(router_han)
     server.include_router(router_ini)
     
