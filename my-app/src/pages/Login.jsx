@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Container from 'react-bootstrap/Container';
-import CommonNavbar from '../component/RBSNav';
 import { signIn } from '../js/api';
 import { getCookie, setCookie } from "../js/cookie";
 import { catchErrorHandler } from '../js/common';
@@ -11,6 +10,8 @@ import { catchErrorHandler } from '../js/common';
 const Login = () => {
     const [ userId, setUserId ] = useState('');
     const [ userPw, setUserPw ] = useState('');
+    const [ idInput, setIdInput ] = useState('');
+    const [ pwInput, setPwInput ] = useState('');
     const navigate = useNavigate();
 
     const logIn = async () => {
@@ -25,7 +26,9 @@ const Login = () => {
                     path: '/',
                 });
                 navigate('/home');
-            } else catchErrorHandler(result);
+            } else {
+                catchErrorHandler(result);
+            }
         };
     }
 
@@ -35,17 +38,17 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(userId);
-        console.log(userPw);
+        setUserId(idInput);
+        setUserPw(pwInput);
+        logIn();
     }
 
-    useEffect(() => {
-        if (getCookie('myToken')) navigate('/home');
-    }, []);
+    // useEffect(() => {
+    //     if (getCookie('myToken')) navigate('/home');
+    // }, []);
 
     return (
         <>
-        {/* <CommonNavbar/> */}
         <br></br>
         <br></br>
         <div>
@@ -56,8 +59,8 @@ const Login = () => {
                         <Form.Control 
                             type="id" 
                             placeholder="Enter ID" 
-                            value={userId}
-                            onChange={(e) => setUserId(e.target.value)}
+                            value={idInput}
+                            onChange={(e) => setIdInput(e.target.value)}
                         />
                         <Form.Text className="text-muted">
                         </Form.Text>
@@ -67,9 +70,9 @@ const Login = () => {
                         <Form.Label>Password</Form.Label>
                         <Form.Control 
                             type="password" 
-                            placeholder="Password"
-                            value={userPw}
-                            onChange={(e) => setUserPw(e.target.value)}
+                            placeholder="Enter Password"
+                            value={pwInput}
+                            onChange={(e) => setPwInput(e.target.value)}
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit">
