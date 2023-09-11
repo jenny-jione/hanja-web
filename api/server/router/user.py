@@ -18,6 +18,14 @@ router_user = APIRouter(
     tags=['User api']
 )
 
+@router_user.post('/signup', status_code=status.HTTP_204_NO_CONTENT)
+def user_create(
+    _user_create: userSchema.UserCreate,
+    db: Session = Depends(get_db)
+):
+    userCrud.create_user(db=db, user_create=_user_create)
+
+
 @router_user.post('/login', response_model=userSchema.Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                            db: Session = Depends(get_db)):
