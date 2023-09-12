@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from server.database import get_db
+from server.router.user import get_current_user
 from server.crud import hanCrud
 from server.schema import hanSchema, baseSchema
+from server.models import UserTable
 from typing import List
 
 router_han = APIRouter(
@@ -17,15 +19,18 @@ def get_h_list(
     search: str = None,
     page: int = 1,
     limit: int = 10,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: UserTable = Depends(get_current_user)
 ):  
+    current_user_id = current_user.user_id
     offset = (page - 1) * limit
     limit = 1817
     total_count, result = hanCrud.get_han_list(db=db, 
                                                search=search,
                                                sort_key=sort_key, 
                                                limit=limit, 
-                                               offset=offset)
+                                               offset=offset,
+                                               current_user_id=current_user_id)
     total_page = total_count // limit
     if total_count % limit != 0:
         total_page += 1
@@ -75,15 +80,14 @@ def get_h_info_shuffle(
 def examine_user_input(
     h_id: int,
     user_input: str = 't',
-    db: Session = Depends(get_db)
-    # user_id: int
+    db: Session = Depends(get_db),
+    current_user: UserTable = Depends(get_current_user)
 ):
-    # user 정보도 가져와야 하냉 . . . 
-    user_id = 1
+    current_user_id = current_user.user_id
     result = hanCrud.examine_input(db, 
                           h_id=h_id, 
                           user_input=user_input,
-                          user_id=user_id
+                          user_id=current_user_id
                           )
     return result
 
@@ -92,14 +96,13 @@ def examine_user_input(
 def check_update(
     h_id: int,
     check: bool,
-    db: Session = Depends(get_db)
-    # user_id: int
+    db: Session = Depends(get_db),
+    current_user: UserTable = Depends(get_current_user)
 ):
-    # user 정보도 가져와야 하냉 . . . 
-    user_id = 1
+    current_user_id = current_user.user_id
     result = hanCrud.update_check(db, 
                           h_id=h_id, 
                           check=check,
-                          user_id=user_id
+                          user_id=current_user_id
                           )
     return result

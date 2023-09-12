@@ -8,8 +8,9 @@ def get_han_list(db: Session,
                  search: str,
                  sort_key: Enum, 
                  limit: int, 
-                 offset: int):
-    current_user_id = 1 # TODO: 로그인 기능 구현되면 로그인 정보 받아와서 해당하는 user_id로 가져와야 함
+                 offset: int,
+                 current_user_id: str
+                 ):
     grade_sub_q = db.query(GradeTable).filter(GradeTable.user_id==current_user_id).subquery()
 
     han_list = db.query(

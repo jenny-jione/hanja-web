@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCookie } from './cookie';
 
 
 // = 에러 핸들링
@@ -7,7 +8,13 @@ const catchError = async error => {
     const { detail } = error?.response?.data;
     switch (status) {
       case 401:
+        if (detail == 'Not authenticated'){
+          return alert('토큰값이 없습니다.');
+        }
+        else if (detail == 'Incorrect id or password') {
           return alert('아이디 또는 비밀번호가 틀렸습니다.\n다시 입력해 주세요.');
+        }
+        break;
       case 500:
       case 504:
         return 'serverError';
@@ -30,6 +37,12 @@ export const signIn = async (id, pw) => {
 };
 
 
+const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${getCookie('myToken')}`,
+};
+
+
 // 리스트 불러오기
 export const getList = async (
     { page, limit },
@@ -38,7 +51,8 @@ export const getList = async (
 ) => {
     try {
         return await axios.get(
-            `/han/list?page=${page}&limit=${limit}&search=${searchText}&sort_key=${sortOrder}`
+            `/han/list?page=${page}&limit=${limit}&search=${searchText}&sort_key=${sortOrder}`,
+            { headers }
         );
     } catch (error) {
         return catchError(error);
@@ -91,7 +105,11 @@ export const getCheck = async(
 // 체크 - 사용자 yes/no 결과 업데이트
 export const updateCheck = async(hid, check) => {
     try {
-        return await axios.post(`/han/check/${hid}?check=${check}`)
+        return await axios.post(
+            `/han/check/${hid}?check=${check}`, 
+            null,
+            { headers }
+        );
     } catch (error) {
         return catchError(error)
     }
@@ -101,7 +119,11 @@ export const updateCheck = async(hid, check) => {
 // 테스트 - 사용자 입력 examine해서 정오 결과 리턴받음
 export const examineInput = async(hid, input) => {
     try {
-        const response = await axios.post(`/han/test/${hid}?user_input=${input}`)
+        const response = await axios.post(
+            `/han/test/${hid}?user_input=${input}`,
+            null,
+            { headers }
+            )
         return response.data;
     } catch (error) {
         return catchError(error)
