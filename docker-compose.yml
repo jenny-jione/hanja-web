@@ -12,6 +12,8 @@ services:
       MARIADB_INITDB_SKIP_TZINFO: "1"
       MARIADB_ROOT_PASSWORD: 1111
       TZ: "Asia/Seoul"
+    volumes:
+      - mariadb-data:/var/lib/mysql
   server:
     depends_on:
       - db
@@ -27,4 +29,7 @@ services:
       - ./api:/app
     ports:
       - 3001:3001
+
+volumes:
+  mariadb-data:
 
