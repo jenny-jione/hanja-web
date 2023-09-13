@@ -7,6 +7,14 @@ class SortOrder(str, Enum):
     ganada = 'ganada'
     count_asc = 'count_asc'
     count_desc = 'count_desc'
+    level_asc = 'level_asc'
+    level_desc = 'level_desc'
+
+
+class ListFilter(str, Enum):
+    all = 'all'
+    level2 = 'level2'
+    level3 = 'level3'
 
 
 class HanListOut(BaseModel):

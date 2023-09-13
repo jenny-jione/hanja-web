@@ -6,7 +6,8 @@ from sqlalchemy import func
 
 def get_han_list(db: Session,
                  search: str,
-                 sort_key: Enum, 
+                 filter: Enum,
+                 sort_key: Enum,
                  limit: int, 
                  offset: int,
                  current_user_id: str
@@ -25,6 +26,8 @@ def get_han_list(db: Session,
             grade_sub_q,
             grade_sub_q.c.h_id==HanTable.id
         )
+    if filter:
+        han_list = han_list.filter(HanTable.level)
     if search:
         han_list = han_list.filter(HanTable.kor.like(f'%{search}%'))
     
@@ -37,6 +40,14 @@ def get_han_list(db: Session,
     elif sort_key == 'count_desc':
         han_list = han_list.order_by(
             grade_sub_q.c.count.desc()
+        )
+    elif sort_key == 'level_asc':
+        han_list = han_list.order_by(
+            HanTable.level.asc()
+        )
+    elif sort_key == 'level_desc':
+        han_list = han_list.order_by(
+            HanTable.level.desc()
         )
     han_list = han_list.order_by(
         HanTable.id.asc()

@@ -16,6 +16,7 @@ router_han = APIRouter(
 @router_han.get('/list', response_model=baseSchema.Response[List[hanSchema.HanListOut]])
 def get_h_list(
     sort_key: hanSchema.SortOrder = None,
+    filter: hanSchema.ListFilter = None,
     search: str = None,
     page: int = 1,
     limit: int = 10,
@@ -27,6 +28,7 @@ def get_h_list(
     limit = 1817
     total_count, result = hanCrud.get_han_list(db=db, 
                                                search=search,
+                                               filter='',
                                                sort_key=sort_key, 
                                                limit=limit, 
                                                offset=offset,
