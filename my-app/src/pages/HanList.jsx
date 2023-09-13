@@ -76,8 +76,7 @@ const HanList = () => {
     useEffect(() => {
         getHanList();
         console.log('====use effect !!====')
-    //   }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
-      }, [pageInfo.page, pageInfo.limit, searchText]);
+    }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
 
     return (
         <>
@@ -112,12 +111,12 @@ const HanList = () => {
             <tr>
                 <th>idx</th>
                 <th>han</th>
-                <th onClick={() => changeSortOrder('ganada')}>kor</th>
+                <th onClick={() => setSortOrder('ganada')}>kor</th>
                 <th>radical</th>
                 {/* <th onClick={() => changeSortOrder('level')}>level</th> // TODO toggle sort order ing */}
                 {/* <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? setSortOrder('level_asc') : setSortOrder('level_desc')}</th> // TODO toggle sort order ing */}
                 <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? changeSortOrder('level_asc') : changeSortOrder('level_desc') }</th>
-                <th onClick={() => changeSortOrder('count')}>count</th>
+                <th onClick={() => setSortOrder('count_desc')}>count</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>
