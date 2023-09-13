@@ -22,6 +22,7 @@ const HanList = () => {
       });
     const [ totalCount, setTotalCount ] = useState('');
     const [ sortOrder, setSortOrder ] = useState('ganada');
+    const [ isAsc, setIsAsc ] = useState(true); // TODO toggle sort order ing
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +36,13 @@ const HanList = () => {
             setList(result?.data?.data);
             setTotalCount(result?.data?.meta?.totalCount);
         }
+    }
+
+    // TODO toggle sort order ing
+    // sortOrder change
+    const changeSortOrder = (key) => {
+        console.log('key:', key);
+        // setSortOrder(key);
     }
 
     const handleSubmit = (e) => {
@@ -64,9 +72,12 @@ const HanList = () => {
         ));
     };
 
+    // TODO toggle sort order ing
     useEffect(() => {
         getHanList();
-      }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
+        console.log('====use effect !!====')
+    //   }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
+      }, [pageInfo.page, pageInfo.limit, searchText]);
 
     return (
         <>
@@ -101,10 +112,12 @@ const HanList = () => {
             <tr>
                 <th>idx</th>
                 <th>han</th>
-                <th onClick={() => setSortOrder('ganada')}>kor</th>
+                <th onClick={() => changeSortOrder('ganada')}>kor</th>
                 <th>radical</th>
-                <th>level</th>
-                <th onClick={() => setSortOrder('count_desc')}>count</th>
+                {/* <th onClick={() => changeSortOrder('level')}>level</th> // TODO toggle sort order ing */}
+                {/* <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? setSortOrder('level_asc') : setSortOrder('level_desc')}</th> // TODO toggle sort order ing */}
+                <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? changeSortOrder('level_asc') : changeSortOrder('level_desc') }</th>
+                <th onClick={() => changeSortOrder('count')}>count</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>
