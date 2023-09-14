@@ -9,6 +9,8 @@ class SortOrder(str, Enum):
     count_desc = 'count_desc'
     level_asc = 'level_asc'
     level_desc = 'level_desc'
+    stroke_asc = 'stroke_asc'
+    stroke_desc = 'stroke_desc'
 
 
 class ListFilter(str, Enum):

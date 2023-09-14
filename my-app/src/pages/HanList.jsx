@@ -43,7 +43,12 @@ const HanList = () => {
     // sortOrder change
     const changeSortOrder = (key) => {
         console.log('key:', key);
-        // setSortOrder(key);
+        setIsAsc(!isAsc);
+        if (isAsc){
+            setSortOrder(key+'_asc');
+        } else {
+            setSortOrder(key+'_desc');
+        }
     }
 
     const handleSubmit = (e) => {
@@ -114,10 +119,9 @@ const HanList = () => {
                 <th>han</th>
                 <th onClick={() => setSortOrder('ganada')}>kor</th>
                 <th>radical</th>
-                {/* <th onClick={() => changeSortOrder('level')}>level</th> // TODO toggle sort order ing */}
-                {/* <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? setSortOrder('level_asc') : setSortOrder('level_desc')}</th> // TODO toggle sort order ing */}
-                <th onClick={() => setIsAsc(!isAsc)}>level {isAsc ? changeSortOrder('level_asc') : changeSortOrder('level_desc') }</th>
-                <th onClick={() => setSortOrder('count_desc')}>count</th>
+                <th onClick={() => changeSortOrder('level')}>level {isAsc}</th>
+                <th onClick={() => changeSortOrder('count')}>count </th>
+                <th onClick={() => changeSortOrder('stroke')}>stroke</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>

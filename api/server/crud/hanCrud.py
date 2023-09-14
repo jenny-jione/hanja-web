@@ -49,6 +49,17 @@ def get_han_list(db: Session,
         han_list = han_list.order_by(
             HanTable.level.desc()
         )
+    elif sort_key == 'stroke_asc':
+        han_list = han_list.order_by(
+            HanTable.stroke_count.asc(),
+            HanTable.level.desc()
+        )
+    elif sort_key == 'stroke_desc':
+        han_list = han_list.order_by(
+            HanTable.stroke_count.desc(),
+            HanTable.level.asc()
+        )
+
     han_list = han_list.order_by(
         HanTable.id.asc()
         ).offset(offset).limit(limit).all()
