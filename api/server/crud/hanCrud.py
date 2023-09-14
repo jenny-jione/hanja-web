@@ -21,6 +21,7 @@ def get_han_list(db: Session,
         HanTable.radical,
         HanTable.radical_name,
         HanTable.level,
+        HanTable.stroke_count,
         func.coalesce(grade_sub_q.c.count, 0).label('count')
         ).outerjoin(
             grade_sub_q,

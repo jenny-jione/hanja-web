@@ -17,6 +17,7 @@ class ListFilter(str, Enum):
     all = 'all'
     level2 = 'level2'
     level3 = 'level3'
+    # TODO 부수별로 filter
 
 
 class HanListOut(BaseModel):
@@ -27,6 +28,7 @@ class HanListOut(BaseModel):
     radical_name: str
     level: str
     count: Optional[int]
+    stroke_count: int
 
     class Config:
         from_attributes = True

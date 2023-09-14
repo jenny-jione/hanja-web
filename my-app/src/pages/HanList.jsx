@@ -66,7 +66,7 @@ const HanList = () => {
         const handleRowClick = (id) => {
             navigate(`/detail/${id}`)
         }
-        return list.map(({ id, hanja, kor, radical, radical_name, level, count }, index) => (
+        return list.map(({ id, hanja, kor, radical, radical_name, level, count, stroke_count }, index) => (
             <tr key={id} onClick={() => handleRowClick(id)}>
                 <td>{index+1}</td>
                 <td>{hanja}</td>
@@ -74,11 +74,11 @@ const HanList = () => {
                 <td>{radical} : {radical_name}</td>
                 <td>{convertLevel(level)}</td>
                 <td>{count}</td>
+                <td>{stroke_count}</td>
             </tr>
         ));
     };
 
-    // TODO toggle sort order ing
     useEffect(() => {
         getHanList();
         console.log('====use effect !!====')
