@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { convertLevel } from "../js/common";
 
 
 // 상세정보
@@ -69,7 +70,7 @@ const HanInfo = () => {
                     {data?.h_info?.radical} : {data?.h_info?.radical_name}
                 </div>
                 <div>
-                    {data?.h_info?.level}
+                    {convertLevel(data?.h_info?.level)}
                 </div>    
             </Row>
             </>

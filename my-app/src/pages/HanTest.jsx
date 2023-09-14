@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-
+import { convertLevel } from "../js/common";
 
 
 // 시험
@@ -113,7 +113,7 @@ const HanTest = () => {
                             ({data?.h_info?.radical} : {data?.h_info?.radical_name})
                         </div>
                         <div>
-                            {data?.h_info?.level}
+                            {convertLevel(data?.h_info?.level)}
                         </div>
                     </div>
                 }

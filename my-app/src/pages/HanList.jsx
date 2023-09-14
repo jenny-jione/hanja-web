@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Table from 'react-bootstrap/Table';
+import { convertLevel } from '../js/common';
 
 const HanList = () => {
     const [list, setList] = useState([]);
@@ -66,7 +67,7 @@ const HanList = () => {
                 <td>{hanja}</td>
                 <td>{kor}</td>
                 <td>{radical} : {radical_name}</td>
-                <td>{level}</td>
+                <td>{convertLevel(level)}</td>
                 <td>{count}</td>
             </tr>
         ));

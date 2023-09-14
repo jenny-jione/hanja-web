@@ -6,3 +6,15 @@ export const catchErrorHandler = error => {
     else if (error === 'wrongPw')
       return alert('비밀번호가 틀렸습니다.\n다시 입력해 주세요.'); 
   };
+
+
+
+export const convertLevel = (lv) => {
+  const num = lv[0];
+  const jun = lv[1]; // 준 ox
+  if (jun == '0'){
+      return num+'급';
+  } else {
+      return '준'+num;
+  }
+};
