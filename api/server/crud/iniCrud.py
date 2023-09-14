@@ -4,7 +4,7 @@ import csv
 
 # csv to db
 def initiate_data(db: Session):
-    with open('server/src/data.csv', 'r') as f:
+    with open('server/src/data_new.csv', 'r') as f:
         rdr = csv.reader(f)
         next(rdr)
         for row in rdr:
