@@ -30,7 +30,7 @@ class GradeTable(Base):
     __tablename__ = "grade"
     
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    h_id = Column(BigInteger, nullable=False)
+    hanja = Column(VARCHAR(10), unique=True, index=True)
     count = Column(BigInteger, nullable=False)
     user_id = Column(String(255), nullable=False)
     

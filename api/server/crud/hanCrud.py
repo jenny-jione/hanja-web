@@ -24,7 +24,7 @@ def get_han_list(db: Session,
         func.coalesce(grade_sub_q.c.count, 0).label('count')
         ).outerjoin(
             grade_sub_q,
-            grade_sub_q.c.h_id==HanTable.id
+            grade_sub_q.c.hanja==HanTable.hanja
         )
     if filter:
         han_list = han_list.filter(HanTable.level)
@@ -138,9 +138,9 @@ def check_one(ans, res):
     return False
 
 
-def update_grade(db: Session, h_id: int, check_result: bool, user_id: int):
-    grade_base_q = db.query(GradeTable).filter(GradeTable.h_id==h_id,
-                                             GradeTable.user_id==user_id)
+def update_grade(db: Session, hanja: str, check_result: bool, user_id: int):
+    grade_base_q = db.query(GradeTable).filter(GradeTable.hanja==hanja,
+                                               GradeTable.user_id==user_id)
     grade_info = grade_base_q.first()
     
     # 코드 더 깔끔하게 고치는 방법 찾아보기 .. if문 너무 많음
@@ -158,7 +158,7 @@ def update_grade(db: Session, h_id: int, check_result: bool, user_id: int):
     else:
         if not check_result:
             record = GradeTable(
-                h_id=h_id,
+                hanja=hanja,
                 count=1,
                 user_id=user_id
             )
@@ -169,13 +169,16 @@ def examine_input(db: Session, h_id: int, user_input: str, user_id: int):
     print('h_id:', h_id)
     h_info = db.query(HanTable).filter(HanTable.id==h_id).first()
     answer = h_info.kor
+    hanja = h_info.hanja
     check_result = check_response(answer=answer, user_response=user_input)
     
-    update_grade(db=db, h_id=h_id, check_result=check_result, user_id=user_id)
+    update_grade(db=db, hanja=hanja, check_result=check_result, user_id=user_id)
 
     return check_result
 
 
 def update_check(db: Session, h_id: int, check: bool, user_id: int):
-    update_grade(db=db, h_id=h_id, check_result=check, user_id=user_id)            
+    h_info = db.query(HanTable.hanja).filter(HanTable.id==h_id).first()
+    hanja = h_info.hanja
+    update_grade(db=db, hanja=hanja, check_result=check, user_id=user_id)            
     return check
