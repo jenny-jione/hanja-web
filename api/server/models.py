@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, BigInteger, String, VARCHAR, Date
+from sqlalchemy import Column, BigInteger, String, VARCHAR, Date, Integer
 
 class UserTable(Base):
     __tablename__ = "users"
@@ -19,7 +19,7 @@ class HanTable(Base):
     kor = Column(VARCHAR(30), nullable=False)
     radical = Column(VARCHAR(10), nullable=False)
     radical_name = Column(VARCHAR(30), nullable=False)
-    stroke_count = Column(VARCHAR(10), nullable=False)
+    stroke_count = Column(Integer, nullable=False)
     level = Column(VARCHAR(10), nullable=False)
     rep_pron = Column(VARCHAR(10), nullable=False)
 
