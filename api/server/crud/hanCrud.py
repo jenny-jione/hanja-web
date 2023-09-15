@@ -80,6 +80,24 @@ def get_han_info(db: Session, h_id: int):
         return False
     return han_info
 
+def get_next_random_info(db: Session, current_user_id: str):
+    grade_sub_q = db.query(GradeTable).filter(GradeTable.user_id==current_user_id).subquery()
+    
+    next_info = db.query(
+        HanTable.id
+    ).outerjoin(
+        grade_sub_q,
+        grade_sub_q.c.hanja==HanTable.hanja
+    ).filter(
+        grade_sub_q.c.count > 0
+    ).order_by(
+        func.random()
+    ).first()
+    
+    next_id = next_info.id
+    
+    return next_id
+
 # 입력값 판단
 # answer: db에 저장된 정답, user_response: 사용자가 입력한 답안
 def check_response(answer, user_response):

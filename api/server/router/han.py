@@ -108,3 +108,21 @@ def check_update(
                           user_id=current_user_id
                           )
     return result
+
+
+@router_han.get('/review/{h_id}')
+def get_h_retest(
+    h_id: int,
+    db: Session = Depends(get_db),
+    current_user: UserTable = Depends(get_current_user)
+):
+    h_info = hanCrud.get_han_info(db=db, h_id=h_id)
+    
+    current_user_id = current_user.user_id
+    next_hid = hanCrud.get_next_random_info(db=db, current_user_id=current_user_id)
+    
+    result = {
+        'h_info': h_info,
+        'next_id': next_hid
+    }
+    return result

@@ -15,6 +15,7 @@ const Home = () => {
     const randomNum = Math.floor(Math.random() * 1817 + 1);
     const toCheckPage = () => {navigate(`/check/${randomNum}`);}
     const toTestPage = () => {navigate(`/test/${randomNum}`);}
+    const toRecheckPage = () => {navigate(`/review/${randomNum}`);}
 
     return (
         <>
@@ -32,6 +33,9 @@ const Home = () => {
                     </Button>
                     <Button onClick={() => toTestPage()} variant="light" size="lg">
                         test
+                    </Button>
+                    <Button onClick={() => toRecheckPage()} variant="light" size="lg">
+                        review
                     </Button>
                 </div>
             </Container>

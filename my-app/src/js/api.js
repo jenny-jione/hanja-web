@@ -129,3 +129,18 @@ export const examineInput = async(hid, input) => {
         return catchError(error)
     }
 }
+
+
+// Recheck 화면
+export const getRecheck = async(
+    hid
+) => {
+    try {
+        return await axios.get(
+            `/han/review/${hid}`,
+            { headers }
+        );
+    } catch (error) {
+        return catchError(error)
+    }
+};
