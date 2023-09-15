@@ -12,7 +12,6 @@ import { convertLevel } from "../js/common";
 // 시험
 const HanTest = () => {
     const [data, setData] = useState({
-        prev_id: null,
         h_info: {},
         next_id: null,
     });
