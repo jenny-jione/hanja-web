@@ -7,7 +7,6 @@ import HanList from './pages/HanList';
 import HanInfo from './pages/HanInfo';
 import HanTest from './pages/HanTest';
 import HanCheck from './pages/HanCheck';
-import HanRecheck from './pages/HanRecheck';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCookie } from './js/cookie';
 
@@ -28,8 +27,8 @@ const App = () => {
           <Route path='/list' element={isLoggedIn ? <HanList/> : <Login/>}/>
           <Route path='/detail/:hid' element={isLoggedIn ? <HanInfo/> : <Login/>}/>
           <Route path='/test/:hid' element={isLoggedIn ? <HanTest/> : <Login/>}/>
-          <Route path='/check/:hid' element={isLoggedIn ? <HanCheck/> : <Login/>}/>
-          <Route path='/review/:hid' element={isLoggedIn ? <HanRecheck/> : <Login/>}/>
+          <Route path='/check/:hid' element={isLoggedIn ? <HanCheck reviewProp={false}/> : <Login/>}/>
+          <Route path='/review/:hid' element={isLoggedIn ? <HanCheck reviewProp={true}/> : <Login/>}/>
         </Routes>
       </Router>
     </div>

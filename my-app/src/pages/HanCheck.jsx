@@ -13,7 +13,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { convertLevel } from "../js/common";
 
 
-const HanCheck = () => {
+const HanCheck = (props) => {
     const [isShowClicked, setIsShowClicked] = useState(false);
     const [isEventHandled, setIsEventHandled] = useState(false);
     const [data, setData] = useState({
@@ -22,14 +22,17 @@ const HanCheck = () => {
         next_id: null,
     });
     const { hid } = useParams();
+    const review = props.reviewProp;
     const navigate = useNavigate();
 
+    const [title, setTitle] = useState('title');
     useEffect(() => {
-        document.title = '체크';
+        review ? setTitle('recheck') : setTitle('check');
+        document.title = title;
     });
 
     const getHanCheck = async () => {
-        const result = await getCheck(hid);
+        const result = await getCheck(hid, review);
         if (typeof result === 'object') {
             setData(result?.data);
             setIsShowClicked(false);
@@ -54,7 +57,12 @@ const HanCheck = () => {
             // 2
             setIsEventHandled(true);
             // 3
-            navigate(`/check/${data['next_id']}`)
+            if (review==true) {
+                navigate(`/review/${data['next_id']}`);
+            } else {
+                navigate(`/check/${data['next_id']}`);
+            }
+            // navigate(`/check/${data['next_id']}`)
         }
     }
 
