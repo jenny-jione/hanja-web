@@ -72,7 +72,8 @@ const HanList = () => {
                 <td>{hanja}</td>
                 <td>{kor}</td>
                 <td>{radical} : {radical_name}</td>
-                <td>{convertLevel(level)}</td>
+                {/* <td>{convertLevel(level)}</td> */}
+                <td>{level[1]=='0' ? level[0]+'급' : '준'+level[0]}</td>
                 <td>{count}</td>
                 <td>{stroke_count}</td>
             </tr>
