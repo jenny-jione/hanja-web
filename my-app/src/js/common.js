@@ -10,11 +10,13 @@ export const catchErrorHandler = error => {
 
 
 export const convertLevel = (lv) => {
-  const num = lv[0];
-  const jun = lv[1]; // 준 ox
-  if (jun == '0'){
-      return num+'급';
-  } else {
-      return '준'+num;
+  if (lv){
+    const num = lv[0];
+    const jun = lv[1]; // 준 ox
+    if (jun == '0'){
+        return num+'급';
+    } else {
+        return '준'+num+'급';
+    }
+  };
   }
-};
