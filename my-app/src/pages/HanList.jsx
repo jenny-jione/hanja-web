@@ -23,7 +23,7 @@ const HanList = () => {
       });
     const [ totalCount, setTotalCount ] = useState('');
     const [ sortOrder, setSortOrder ] = useState('ganada');
-    const [ isAsc, setIsAsc ] = useState(true); // TODO toggle sort order ing
+    const [ isAsc, setIsAsc ] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,7 +39,6 @@ const HanList = () => {
         }
     }
 
-    // TODO toggle sort order ing
     // sortOrder change
     const changeSortOrder = (key) => {
         console.log('key:', key);
@@ -120,8 +119,8 @@ const HanList = () => {
                 <th>han</th>
                 <th onClick={() => setSortOrder('ganada')}>kor</th>
                 <th>radical</th>
-                <th onClick={() => changeSortOrder('level')}>level {isAsc}</th>
-                <th onClick={() => changeSortOrder('count')}>count </th>
+                <th onClick={() => changeSortOrder('level')}>level</th>
+                <th onClick={() => changeSortOrder('count')}>count</th>
                 <th onClick={() => changeSortOrder('stroke')}>stroke</th>
             </tr>
             </thead>
