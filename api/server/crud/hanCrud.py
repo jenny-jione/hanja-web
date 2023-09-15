@@ -94,6 +94,8 @@ def get_next_random_info(db: Session, current_user_id: str):
         func.random()
     ).first()
     
+    if not next_info:
+        return None
     next_id = next_info.id
     
     return next_id

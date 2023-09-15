@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCookie } from './cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 // = 에러 핸들링
@@ -15,6 +16,11 @@ const catchError = async error => {
           return alert('아이디 또는 비밀번호가 틀렸습니다.\n다시 입력해 주세요.');
         }
         break;
+      case 404:
+        if (detail == 'Next Item Not Exist'){
+          // TODO: home navigate 구현
+          return alert('홈으로 이동합니다.')
+        }
       case 500:
       case 504:
         return 'serverError';
@@ -90,11 +96,12 @@ export const getTest = async(
 
 // 체크 화면
 export const getCheck = async(
-    hid
+    hid, review
 ) => {
     try {
         return await axios.get(
-            `/han/shuffle/${hid}`
+            `/han/shuffle/${hid}?review=${review}`,
+            { headers }
         );
     } catch (error) {
         return catchError(error)
@@ -129,18 +136,3 @@ export const examineInput = async(hid, input) => {
         return catchError(error)
     }
 }
-
-
-// Recheck 화면
-export const getRecheck = async(
-    hid
-) => {
-    try {
-        return await axios.get(
-            `/han/review/${hid}`,
-            { headers }
-        );
-    } catch (error) {
-        return catchError(error)
-    }
-};

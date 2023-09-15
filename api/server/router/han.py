@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from server.database import get_db
 from server.router.user import get_current_user
@@ -63,15 +63,23 @@ def get_h_info(
 @router_han.get('/shuffle/{h_id}')
 def get_h_info_shuffle(
     h_id: int,
-    db: Session = Depends(get_db)
+    review: bool = False,
+    db: Session = Depends(get_db),
+    current_user: UserTable = Depends(get_current_user)
 ):
-    # 이전 다음 id는 임의로 랜덤으로 ..
     h_info = hanCrud.get_han_info(db=db, h_id=h_id)
-    import random
-    prev_id = random.randint(1, 1817)
-    next_id = random.randint(1, 1817)
+
+    if review:
+        current_user_id = current_user.user_id
+        next_id = hanCrud.get_next_random_info(db=db, current_user_id=current_user_id)
+    else:
+        import random
+        next_id = random.randint(1, 1817)
+    
+    if not next_id:
+        raise HTTPException(status_code=404, detail='Next Item Not Exist')
+
     result = {
-        'prev_id': prev_id,
         'h_info': h_info,
         'next_id': next_id
     }
