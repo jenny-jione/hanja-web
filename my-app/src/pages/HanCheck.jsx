@@ -55,6 +55,11 @@ const HanCheck = (props) => {
             console.log(check);
             // 2
             setIsEventHandled(true);
+            // 0 
+            if (data?.next_id == null){
+                alert("복습할 단어가 없습니다. 홈으로 돌아갑니다.");
+                return navigate('/home');
+            }
             // 3
             if (review==true) {
                 navigate(`/review/${data['next_id']}`);
