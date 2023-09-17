@@ -17,7 +17,6 @@ const HanCheck = (props) => {
     const [isShowClicked, setIsShowClicked] = useState(false);
     const [isEventHandled, setIsEventHandled] = useState(false);
     const [data, setData] = useState({
-        prev_id: null,
         h_info: {},
         next_id: null,
     });
