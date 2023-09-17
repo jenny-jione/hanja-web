@@ -75,9 +75,6 @@ def get_h_info_shuffle(
     else:
         import random
         next_id = random.randint(1, 1817)
-    
-    if not next_id:
-        raise HTTPException(status_code=404, detail='Next Item Not Exist')
 
     result = {
         'h_info': h_info,
