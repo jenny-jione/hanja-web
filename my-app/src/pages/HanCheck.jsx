@@ -82,7 +82,7 @@ const HanCheck = (props) => {
         <Container>
             <Row>
                 <div className="text-center">
-                    <h1>{data?.h_info?.hanja}</h1>
+                    <h1 style={{fontSize:80}}>{data?.h_info?.hanja}</h1>
                 </div>
             </Row>
             <Row>
