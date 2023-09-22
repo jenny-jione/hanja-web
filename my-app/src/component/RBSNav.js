@@ -14,9 +14,9 @@ function CommonNavbar() {
     return (
         <Navbar className="justify-content-center" bg="light" data-bs-theme="light">
             <Container>
-                <Navbar.Brand href="/home">Home</Navbar.Brand>
+                <Navbar.Brand href="/home">홈</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="/list">list</Nav.Link>
+                    <Nav.Link href="/list">목록</Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link>{getCookie('userInfo')}</Nav.Link>
@@ -27,7 +27,7 @@ function CommonNavbar() {
                             removeCookie('myToken', {path:'/'});
                             removeCookie('userInfo', {path:'/'});
                             return navigate('/');
-                        }} variant="secondary">Logout</Button>
+                        }} variant="secondary">로그아웃</Button>
                     </Col>
                     </Row>
             </Container> 

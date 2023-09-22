@@ -121,15 +121,15 @@ const HanCheck = (props) => {
                 {
                     !isShowClicked &&
                     <Button onClick={showAnswer} variant="light" size="lg">
-                        show answer
+                        훈 음 보기
                     </Button>
                 }
                 {
                     isShowClicked && !isEventHandled &&
                     <>
                     <ButtonGroup aria-label="Basic example">
-                        <Button onClick={() => postCheck(true)} variant="light">yes</Button>
-                        <Button onClick={() => postCheck(false)} variant="secondary">no</Button>
+                        <Button onClick={() => postCheck(true)} variant="light">안다</Button>
+                        <Button onClick={() => postCheck(false)} variant="secondary">모른다</Button>
                     </ButtonGroup>
                     </>
                 }

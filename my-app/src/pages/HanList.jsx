@@ -90,14 +90,15 @@ const HanList = () => {
         <Form onSubmit={handleSubmit}>
             <InputGroup className="mb-3">
                 <Form.Control
-                    placeholder="Input word"
+                    // placeholder="Input word"
+                    placeholder="검색어를 입력하세요"
                     aria-label="User Input"
                     aria-describedby="basic-addon2"
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
                 />
                 <Button type="submit" variant="outline-secondary" id="button-addon2">
-                Search
+                검색
                 </Button>
             </InputGroup>
         </Form>
@@ -115,13 +116,13 @@ const HanList = () => {
         <Table striped bordered hover size="sm">
             <thead>
             <tr>
-                <th>idx</th>
-                <th>han</th>
-                <th onClick={() => setSortOrder('ganada')}>kor</th>
-                <th>radical</th>
-                <th onClick={() => changeSortOrder('level')}>level</th>
-                <th onClick={() => changeSortOrder('count')}>count</th>
-                <th onClick={() => changeSortOrder('stroke')}>stroke</th>
+                <th>번호</th>
+                <th>漢</th>
+                <th onClick={() => setSortOrder('ganada')}>훈 음</th>
+                <th>부수</th>
+                <th onClick={() => changeSortOrder('level')}>級</th>
+                <th onClick={() => changeSortOrder('count')}>誤</th>
+                <th onClick={() => changeSortOrder('stroke')}>畫</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>

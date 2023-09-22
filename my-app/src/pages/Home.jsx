@@ -26,16 +26,16 @@ const Home = () => {
             <Container className="panel">
                 <div className="d-grid gap-2">
                     <Button href="/list" variant="light" size="lg">
-                        list
+                        전체 한자 목록 보기
                     </Button>
                     <Button onClick={() => toCheckPage()} variant="light" size="lg">
-                        check
+                        시험 (자가진단)
                     </Button>
                     <Button onClick={() => toTestPage()} variant="light" size="lg">
-                        test
+                        시험 (주관식)
                     </Button>
                     <Button onClick={() => toRecheckPage()} variant="light" size="lg">
-                        review
+                        오답 복습
                     </Button>
                 </div>
             </Container>
