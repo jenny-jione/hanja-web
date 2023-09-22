@@ -76,14 +76,14 @@ const HanInfo = () => {
             </>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             <Row>
-                {
+                {/* {
                     <>
                     <ButtonGroup aria-label="Basic example">
                         <Button variant="light">prev</Button>
                         <Button variant="secondary">next</Button>
                     </ButtonGroup>
                     </>
-                }
+                } */}
             </Row>
         </Container>
         </>
