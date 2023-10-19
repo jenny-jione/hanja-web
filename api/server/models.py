@@ -35,3 +35,10 @@ class GradeTable(Base):
     user_id = Column(String(255), nullable=False)
     
 
+class ElementTable(Base):
+    __tablename__ = "element"
+    
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    hanja = Column(VARCHAR(10), nullable=False, index=True)
+    partial_hanja = Column(VARCHAR(10), nullable=False)
+    partial_kor = Column(VARCHAR(30), nullable=False)
