@@ -13,3 +13,10 @@ def initiate(
     db: Session = Depends(get_db)
 ):
     iniCrud.initiate_data(db)
+
+
+@router_ini.post('/element')
+def initiate_element(
+    db: Session = Depends(get_db)
+):
+    iniCrud.initiate_data_element(db)
