@@ -103,7 +103,8 @@ const HanCheck = (props) => {
             {
                 isShowClicked && 
                 <>
-                <Row style={{fontSize:60}} className="text-center">
+                {/* <Row style={{fontSize:60}} className="text-center"> */}
+                <Row className="text-center">
                     <div>
                         {data?.h_info?.kor}
                     </div>
