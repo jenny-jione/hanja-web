@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from enum import Enum
 
 
@@ -32,3 +32,40 @@ class HanListOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class HanInfo(BaseModel):
+    id: int
+    hanja: str
+    kor: str
+    radical: str
+    radical_name: str
+    level: str
+
+    class Config:
+        from_attributes = True
+
+
+class ElementHanInfo(BaseModel):
+    partial_hanja: str
+    partial_kor: str
+
+    class Config:
+        from_attributes = True
+
+
+class SimilarHanInfo(BaseModel):
+    id: int
+    hanja: str
+    kor: str
+    partial_hanja: str
+    partial_kor: str
+
+    class Config:
+        from_attributes = True
+
+
+class HanDetailOut(BaseModel):
+    h_info: HanInfo
+    element_info: List[ElementHanInfo]
+    similar_word_info: List[SimilarHanInfo]

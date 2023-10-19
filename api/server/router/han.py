@@ -46,17 +46,14 @@ def get_h_list(
 
 
 
-@router_han.get('/detail/{h_id}')
+@router_han.get('/detail/{h_id}', response_model=hanSchema.HanDetailOut)
 def get_h_info(
     h_id: int,
     search: str = None,
     # filter: str,
     db: Session = Depends(get_db)
 ):
-    h_info = hanCrud.get_han_info_with_prev_next(db=db, filter='a', h_id=h_id)
-    result = {
-        'h_info': h_info,
-    }
+    result = hanCrud.get_han_info_with_prev_next(db=db, filter='a', h_id=h_id)
     return result
 
 
