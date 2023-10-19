@@ -13,7 +13,8 @@ db = {
     "database":os.environ['MYSQL_DATABASE']
 }
 
-SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?charset=utf8"
+# SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?charset=utf8"
+SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{db['user']}:{db['password']}@{db['host']}:{db['port']}/{db['database']}?charset=utf8mb4"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_size=20, max_overflow=40, pool_recycle=30, pool_pre_ping=True)
 Base = declarative_base()
 
