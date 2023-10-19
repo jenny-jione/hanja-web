@@ -1,4 +1,4 @@
-from server.models import HanTable, GradeTable
+from server.models import HanTable, GradeTable, ElementTable
 from sqlalchemy.orm import Session
 from enum import Enum
 from sqlalchemy import func
@@ -69,9 +69,55 @@ def get_han_list(db: Session,
 
 def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
     han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
+    
+    element_sub_q = db.query(
+        ElementTable.partial_hanja
+        ).select_from(
+            HanTable
+        ).filter(
+            HanTable.id == h_id
+        ).join(
+            ElementTable,
+            ElementTable.hanja==HanTable.hanja).subquery()
+
+    element_list = db.query(
+        ElementTable.partial_hanja,
+        ElementTable.partial_kor
+    ).select_from(
+        HanTable
+    ).join(
+        ElementTable,
+        HanTable.hanja==ElementTable.hanja
+        ).filter(HanTable.id==h_id).all()
+    
+    similar_list = db.query(
+        HanTable.id,
+        HanTable.hanja,
+        HanTable.kor,
+        HanTable.stroke_count,
+        ElementTable.partial_hanja,
+        ElementTable.partial_kor
+        ).filter(
+        ElementTable.partial_hanja.in_(element_sub_q)
+        ).outerjoin(
+            ElementTable,
+            ElementTable.hanja==HanTable.hanja
+        ).order_by(
+            # ElementTable.partial_hanja
+            ElementTable.partial_kor,
+            HanTable.stroke_count
+        ).all()
+    
     if not han_info:
         return False
-    return han_info
+    # return han_info
+
+    result = {
+        'h_info': han_info,
+        'element_info': element_list,
+        'similar_word_info': similar_list
+    }
+    return result
 
 
 def get_han_info(db: Session, h_id: int):
