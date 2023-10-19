@@ -25,7 +25,9 @@ def get_db():
         yield session
         session.commit()
         print('- db commit -')
-    except:
+    except Exception as e:
+        print(' - db rollback -')
+        print(e)
         session.rollback() 
     finally:
         session.close()
