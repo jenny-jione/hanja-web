@@ -5,8 +5,7 @@ import CommonNavbar from "../component/RBSNav";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Table from 'react-bootstrap/Table';
 import { convertLevel } from "../js/common";
 
 
@@ -15,6 +14,8 @@ const HanInfo = () => {
     const [data, setData] = useState({
         prev_id: null,
         h_info: {},
+        element_info: [],
+        similar_word_info: [],
         next_id: null,
     });
     const { hid } = useParams();
@@ -40,7 +41,31 @@ const HanInfo = () => {
     }
 
 
+    // element 테이블 렌더 함수
+    const renderElementTableFn = () => {
+        return data?.element_info.map(({ partial_hanja, partial_kor }, index) => (
+            <tr>
+                <td>{partial_hanja}</td>
+                <td>{partial_kor}</td>
+            </tr>
+        ));
+    };
 
+    // 유사한자 테이블 렌더 함수
+    const renderSimilarTableFn = () => {
+        const handleRowClick = (id) => {
+            navigate(`/detail/${id}`)
+        }
+        return data?.similar_word_info.map(({ id, hanja, kor, partial_hanja, partial_kor }, index) => (
+            <tr key={id} onClick={() => handleRowClick(id)}>
+                {/* <td>{index+1}dd</td> */}
+                <td>{hanja}</td>
+                <td>{kor}</td>
+                <td>{partial_hanja}</td>
+                <td>{partial_kor}</td>
+            </tr>
+        ));
+    };
 
 
     useEffect(() => {
@@ -71,10 +96,13 @@ const HanInfo = () => {
                 </div>
                 <div>
                     {convertLevel(data?.h_info?.level)}
+                </div>
+                <div>
+
                 </div>    
             </Row>
             </>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <br/>
             <Row>
                 {/* {
                     <>
@@ -86,6 +114,26 @@ const HanInfo = () => {
                 } */}
             </Row>
         </Container>
+
+        <Table striped bordered hover size="sm">
+        <thead>
+            <tr>
+                <th>모양자</th>
+                <th>훈 음</th>
+            </tr>
+            </thead>
+            <tbody>{renderElementTableFn()}</tbody>
+        </Table>
+
+        <Table striped bordered hover size="sm">
+        <thead>
+            <tr>
+                <th>비슷한 한자</th>
+                <th>훈 음</th>
+            </tr>
+            </thead>
+            <tbody>{renderSimilarTableFn()}</tbody>
+        </Table>
         </>
         
     )
