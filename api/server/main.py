@@ -16,6 +16,8 @@ event.listen(UserTable.__table__, 'after_create', DDL(init_insert_sql))
 Base.metadata.create_all(bind=engine)
 # Base.metadata.drop_all(engine, [Base.metadata.tables['element']])
 # Base.metadata.create_all(engine, [Base.metadata.tables['element']])
+# Base.metadata.drop_all(engine, [Base.metadata.tables['word_example']])
+# Base.metadata.create_all(engine, [Base.metadata.tables['word_example']])
 
 def get_server():
     server = FastAPI(

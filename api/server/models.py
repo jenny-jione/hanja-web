@@ -42,3 +42,13 @@ class ElementTable(Base):
     hanja = Column(VARCHAR(10), nullable=False, index=True)
     partial_hanja = Column(VARCHAR(10), nullable=False)
     partial_kor = Column(VARCHAR(30), nullable=False)
+
+
+class WordExampleTable(Base):
+    __tablename__ = "word_example"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    hanja = Column(VARCHAR(10), nullable=False)
+    word = Column(VARCHAR(30), nullable=False)
+    kor = Column(VARCHAR(30), nullable=False)
+    url = Column(VARCHAR(100), nullable=False)

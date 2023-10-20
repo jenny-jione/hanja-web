@@ -1,4 +1,4 @@
-from .models import HanTable, ElementTable
+from .models import HanTable, ElementTable, WordExampleTable
 from .database import engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import event
@@ -42,6 +42,21 @@ def initiate_element_db(*args, **kwargs):
             hanja=row[0],
             partial_hanja=row[1],
             partial_kor=row[2]
+        )
+        session.add(record)
+    session.commit()
+
+
+@event.listens_for(WordExampleTable.__table__, 'after_create')
+def initiate_word_db(*args, **kwargs):
+    data = load_csv_data('server/src/example_word_edited.csv')
+
+    for row in data:
+        record = WordExampleTable(
+            hanja=row[0],
+            word=row[1],
+            kor=row[2],
+            url=row[3]
         )
         session.add(record)
     session.commit()
