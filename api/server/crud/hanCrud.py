@@ -98,7 +98,7 @@ def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
         ElementTable.partial_hanja,
         ElementTable.partial_kor
         ).filter(
-        ElementTable.partial_hanja.in_(element_sub_q)
+            ElementTable.partial_hanja.in_(element_sub_q)
         ).outerjoin(
             ElementTable,
             ElementTable.hanja==HanTable.hanja
