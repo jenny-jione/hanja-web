@@ -14,6 +14,7 @@ const HanInfo = () => {
     const [data, setData] = useState({
         prev_id: null,
         h_info: {},
+        example_info: [],
         element_info: [],
         similar_word_info: [],
         next_id: null,
@@ -39,6 +40,20 @@ const HanInfo = () => {
     const toHomePage = () => {
         navigate('/list');
     }
+
+    // example 테이블 렌더 함수
+    const renderExampleTableFn = () => {
+        return data?.example_info.map(({ word, kor, url }, index) => (
+            <>
+            <tr onClick={() => {window.open(url)}}>
+                <td onClick={() => {window.open(url)}}>{word}</td>
+                <td>{kor}</td>
+                {/* <td>aaaa</td>
+                <td>bbbb</td> */}
+            </tr>
+            </>
+        ));
+    };
 
 
     // element 테이블 렌더 함수
@@ -114,6 +129,17 @@ const HanInfo = () => {
                 } */}
             </Row>
         </Container>
+
+
+        <Table striped bordered hover size="sm">
+        <thead>
+            {/* <tr>
+                <th>단어</th>
+                <th>훈 음</th>
+            </tr> */}
+            </thead>
+            <tbody>{renderExampleTableFn()}</tbody>
+        </Table>
 
         <Table striped bordered hover size="sm">
         <thead>
