@@ -5,6 +5,7 @@ from server.router.han import router_han
 from server.router.ini import router_ini
 from .models import UserTable
 from .database import Base, engine
+from .init import *
 
 init_insert_sql = """
 INSERT INTO users (user_id, password, user_name, birthday)
