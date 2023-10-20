@@ -35,7 +35,7 @@ def initiate_han_db(*args, **kwargs):
 
 @event.listens_for(ElementTable.__table__, 'after_create')
 def initiate_element_db(*args, **kwargs):
-    data = load_csv_data('server/src/element.csv')
+    data = load_csv_data('server/src/element_new.csv')
     
     for row in data:
         record = ElementTable(
