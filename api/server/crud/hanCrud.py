@@ -70,17 +70,31 @@ def get_han_list(db: Session,
 def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
     han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
     
-    element_sub_q = db.query(
-        ElementTable.partial_hanja
+    element_han = db.query(
+        ElementTable.partial_hanja  # 1
+        # ElementTable.partial_kor  # 2
         ).select_from(
             HanTable
         ).filter(
             HanTable.id == h_id
         ).join(
             ElementTable,
-            ElementTable.hanja==HanTable.hanja).subquery()
+            ElementTable.hanja==HanTable.hanja)#.subquery()
+
+    element_kor = db.query(
+        # ElementTable.partial_hanja  # 1
+        ElementTable.partial_kor  # 2
+        ).select_from(
+            HanTable
+        ).filter(
+            HanTable.id == h_id
+        ).join(
+            ElementTable,
+            ElementTable.hanja==HanTable.hanja)#.subquery()
+
 
     element_list = db.query(
+        ElementTable.hanja,
         ElementTable.partial_hanja,
         ElementTable.partial_kor
     ).select_from(
@@ -98,7 +112,10 @@ def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
         ElementTable.partial_hanja,
         ElementTable.partial_kor
         ).filter(
-            ElementTable.partial_hanja.in_(element_sub_q)
+            ElementTable.partial_hanja.in_(element_han),  # 1
+            ElementTable.partial_kor.in_(element_kor),  # 2
+            ElementTable.partial_kor != '-',
+            ElementTable.hanja != element_list[0].hanja  # to exclude itself
         ).outerjoin(
             ElementTable,
             ElementTable.hanja==HanTable.hanja
