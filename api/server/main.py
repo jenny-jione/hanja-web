@@ -14,6 +14,8 @@ VALUES ('jenny', '1234', '장지원', '1995-10-27')
 event.listen(UserTable.__table__, 'after_create', DDL(init_insert_sql))
 # Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
+# Base.metadata.drop_all(engine, [Base.metadata.tables['element']])
+# Base.metadata.create_all(engine, [Base.metadata.tables['element']])
 
 def get_server():
     server = FastAPI(
