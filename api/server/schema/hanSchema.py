@@ -46,6 +46,15 @@ class HanInfo(BaseModel):
         from_attributes = True
 
 
+class ExampleInfo(BaseModel):
+    word: str
+    kor: str
+    url: str
+
+    class Config:
+        from_attributes = True
+
+
 class ElementHanInfo(BaseModel):
     partial_hanja: str
     partial_kor: str
@@ -67,5 +76,6 @@ class SimilarHanInfo(BaseModel):
 
 class HanDetailOut(BaseModel):
     h_info: HanInfo
+    example_info: List[ExampleInfo]
     element_info: List[ElementHanInfo]
     similar_word_info: List[SimilarHanInfo]
