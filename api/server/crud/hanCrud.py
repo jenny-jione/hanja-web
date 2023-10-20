@@ -1,4 +1,4 @@
-from server.models import HanTable, GradeTable, ElementTable
+from server.models import HanTable, GradeTable, ElementTable, WordExampleTable
 from sqlalchemy.orm import Session
 from enum import Enum
 from sqlalchemy import func
@@ -69,6 +69,13 @@ def get_han_list(db: Session,
 
 def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
     han_info = db.query(HanTable).filter(HanTable.id == h_id).first()
+
+    # word example
+    example_list = db.query(
+        WordExampleTable.word,
+        WordExampleTable.kor,
+        WordExampleTable.url
+    ).filter(WordExampleTable.hanja == han_info.hanja).all()
     
     element_han = db.query(
         ElementTable.partial_hanja  # 1
@@ -115,7 +122,8 @@ def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
             ElementTable.partial_hanja.in_(element_han),  # 1
             ElementTable.partial_kor.in_(element_kor),  # 2
             ElementTable.partial_kor != '-',
-            ElementTable.hanja != element_list[0].hanja  # to exclude itself
+            # ElementTable.hanja != element_list[0].hanja  # to exclude itself
+            ElementTable.hanja != han_info.hanja  # to exclude itself
         ).outerjoin(
             ElementTable,
             ElementTable.hanja==HanTable.hanja
@@ -131,6 +139,7 @@ def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
 
     result = {
         'h_info': han_info,
+        'example_info': example_list,
         'element_info': element_list,
         'similar_word_info': similar_list
     }
