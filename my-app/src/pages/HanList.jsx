@@ -96,6 +96,7 @@ const HanList = () => {
                     aria-describedby="basic-addon2"
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
+                    autoFocus
                 />
                 <Button type="submit" variant="outline-secondary" id="button-addon2">
                 검색
