@@ -130,7 +130,8 @@ def get_han_info_with_prev_next(db: Session, filter: str, h_id: int):
         ).order_by(
             # ElementTable.partial_hanja
             ElementTable.partial_kor,
-            HanTable.stroke_count
+            # HanTable.stroke_count
+            HanTable.rep_pron
         ).all()
     
     if not han_info:
