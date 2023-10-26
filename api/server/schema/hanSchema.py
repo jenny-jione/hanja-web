@@ -79,3 +79,20 @@ class HanDetailOut(BaseModel):
     example_info: List[ExampleInfo]
     element_info: List[ElementHanInfo]
     similar_word_info: List[SimilarHanInfo]
+
+
+class SimilarWordInfo(BaseModel):
+    id: int
+    hanja: str
+    kor: str
+    
+    class Config:
+        from_attributes = True
+    
+
+class SimilarWordOut(BaseModel):
+    row: List[SimilarWordInfo]
+    
+    class Config:
+        from_attributes = True
+    

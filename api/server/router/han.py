@@ -110,3 +110,11 @@ def check_update(
                           user_id=current_user_id
                           )
     return result
+
+
+@router_han.post('/similar', response_model=List[hanSchema.SimilarWordOut])
+def get_similar(
+    db: Session = Depends(get_db)
+):
+    result = hanCrud.get_similar_words(db)
+    return result

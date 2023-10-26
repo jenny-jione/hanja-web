@@ -2,6 +2,7 @@ from server.models import HanTable, GradeTable, ElementTable, WordExampleTable
 from sqlalchemy.orm import Session
 from enum import Enum
 from sqlalchemy import func
+import csv
 
 
 def get_han_list(db: Session,
@@ -287,3 +288,29 @@ def update_check(db: Session, h_id: int, check: bool, user_id: int):
     hanja = h_info.hanja
     update_grade(db=db, hanja=hanja, check_result=check, user_id=user_id)            
     return check
+
+
+# similar words
+def get_similar_words(db: Session):
+    with open('server/src/ab.csv', 'r') as f:
+        rdr = csv.reader(f)
+        lines = list(rdr)
+    result = []
+    for line in lines:
+        h_info = db.query(
+            HanTable.id,
+            HanTable.hanja,
+            HanTable.kor
+        ).filter(HanTable.hanja.in_(line)).all()
+        result.append({"row": h_info})
+        # row = []
+        # for h in line:
+        #     h_info = db.query(
+        #         HanTable.id,
+        #         HanTable.hanja,
+        #         HanTable.kor
+        #     ).filter(HanTable.hanja == h).first()
+        #     row.append(h_info)
+        # result.append({"row": row})
+    
+    return result
