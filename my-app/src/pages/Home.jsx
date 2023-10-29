@@ -16,6 +16,7 @@ const Home = () => {
     const toCheckPage = () => {navigate(`/check/${randomNum}`);}
     const toTestPage = () => {navigate(`/test/${randomNum}`);}
     const toRecheckPage = () => {navigate(`/review/${randomNum}`);}
+    const toSimilarPage = () => {navigate('/similar');}
 
     return (
         <>
@@ -36,6 +37,10 @@ const Home = () => {
                     </Button>
                     <Button onClick={() => toRecheckPage()} variant="light" size="lg">
                         오답 복습
+                    </Button>
+                    {/* <Button href="/similar" variant="light" size="lg"> */}
+                    <Button onClick={() => toSimilarPage()} variant="light" size="lg">
+                        비슷한 한자
                     </Button>
                 </div>
             </Container>

@@ -91,8 +91,8 @@ class SimilarWordInfo(BaseModel):
     
 
 class SimilarWordOut(BaseModel):
-    row: List[SimilarWordInfo]
-    
+    similar_word_info: List[SimilarWordInfo]
+
     class Config:
         from_attributes = True
     

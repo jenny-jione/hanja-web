@@ -302,7 +302,8 @@ def get_similar_words(db: Session):
             HanTable.hanja,
             HanTable.kor
         ).filter(HanTable.hanja.in_(line)).all()
-        result.append({"row": h_info})
+        result.extend(h_info)
+        # result.append({"row": h_info})
         # row = []
         # for h in line:
         #     h_info = db.query(

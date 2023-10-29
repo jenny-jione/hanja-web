@@ -112,7 +112,7 @@ def check_update(
     return result
 
 
-@router_han.post('/similar', response_model=List[hanSchema.SimilarWordOut])
+@router_han.get('/similar', response_model=List[hanSchema.SimilarWordInfo])
 def get_similar(
     db: Session = Depends(get_db)
 ):

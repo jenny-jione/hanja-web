@@ -136,3 +136,15 @@ export const examineInput = async(hid, input) => {
         return catchError(error)
     }
 }
+
+
+// 리스트 불러오기
+export const getSimilarWords = async () => {
+    try {
+        return await axios.get(
+            '/han/similar'
+        );
+    } catch (error) {
+        return catchError(error);
+    }
+};
