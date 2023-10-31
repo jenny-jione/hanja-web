@@ -2,22 +2,11 @@ import { useEffect, useState } from 'react';
 import { getSimilarWords } from '../js/api';
 import { useNavigate } from "react-router-dom";
 import CommonNavbar from '../component/RBSNav';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/esm/Col';
 import Table from 'react-bootstrap/Table';
-import { convertLevel } from '../js/common';
+
 
 const HanSimilar = () => {
-    // const [data, setData] = useState({
-    //     similar_word_info: {}
-    // });
-
-    const [list, setList] = useState([])
-
+    const [list, setList] = useState([]);
 
     const navigate = useNavigate();
 
@@ -29,20 +18,9 @@ const HanSimilar = () => {
     const getHanSimilar = async () => {
         const result = await getSimilarWords();
         if (typeof result === 'object') {
-            // setList(result?.data);
-            console.log(result?.data);
+            setList(result?.data);
         }
     }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();        
-    //     setSearchText(userInput);
-    //     setPageInfo({
-    //         page: 1,
-    //         limit: 10,
-    //     })
-    // }
-
 
     // 테이블 렌더 함수
     const renderTableFn = () => {
@@ -50,7 +28,7 @@ const HanSimilar = () => {
             navigate(`/detail/${id}`)
         }
         return list.map(({ id, hanja, kor }, index) => (
-            <tr key={id} onClick={() => handleRowClick(id)}>
+            <tr key={index} onClick={() => handleRowClick(id)}>
             {/* <tr> */}
                 <td>{hanja}</td>
                 <td>{kor}</td>
@@ -58,11 +36,10 @@ const HanSimilar = () => {
         ));
     };
 
-    // useEffect(() => {
-    //     getHanSimilar();
-    // }, );
+    useEffect(() => {
+        getHanSimilar();
+    }, []);
 
-    getHanSimilar();
 
     return (
         <>
