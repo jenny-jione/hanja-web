@@ -31,7 +31,10 @@ def get_han_list(db: Session,
     if filter:
         han_list = han_list.filter(HanTable.level)
     if search:
-        han_list = han_list.filter(HanTable.kor.like(f'%{search}%'))
+        han_list = han_list.filter(
+            (HanTable.kor.like(f'%{search}%')) |
+            (HanTable.hanja == search)
+            )
     
     total_count = han_list.count()
     print(total_count)
