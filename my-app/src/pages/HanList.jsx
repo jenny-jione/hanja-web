@@ -41,7 +41,6 @@ const HanList = () => {
 
     // sortOrder change
     const changeSortOrder = (key) => {
-        console.log('key:', key);
         setIsAsc(!isAsc);
         if (isAsc){
             setSortOrder(key+'_asc');
@@ -81,7 +80,6 @@ const HanList = () => {
 
     useEffect(() => {
         getHanList();
-        console.log('====use effect !!====')
     }, [pageInfo.page, pageInfo.limit, searchText, sortOrder]);
 
     return (
