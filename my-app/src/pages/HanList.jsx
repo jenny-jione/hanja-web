@@ -106,7 +106,7 @@ const HanList = () => {
             <Row>
                 <Col>
                     <div className="text-center">
-                        {totalCount}
+                        {totalCount}개
                     </div>
                 </Col>
             </Row>
@@ -119,9 +119,17 @@ const HanList = () => {
                 <th>漢</th>
                 <th onClick={() => setSortOrder('ganada')}>훈 음</th>
                 <th>부수</th>
-                <th onClick={() => changeSortOrder('level')}>級</th>
-                <th onClick={() => changeSortOrder('count')}>誤</th>
-                <th onClick={() => changeSortOrder('stroke')}>畫</th>
+                <th onClick={() => changeSortOrder('level')}>級
+                    {sortOrder.includes("level") &&
+                    (sortOrder=="level_asc"?"▲":"▼")}
+                </th>
+                <th onClick={() => changeSortOrder('count')}>誤
+                    {sortOrder.includes("count") &&
+                    (sortOrder=="count_asc"?"▲":"▼")}
+                </th>
+                <th onClick={() => changeSortOrder('stroke')}>畫
+                    {sortOrder.includes("stroke") &&
+                    (sortOrder=="stroke_asc"?"▲":"▼")}</th>
             </tr>
             </thead>
             <tbody>{renderTableFn()}</tbody>
