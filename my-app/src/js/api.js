@@ -86,7 +86,8 @@ export const getTest = async(
 ) => {
     try {
         return await axios.get(
-            `/han/shuffle/${hid}`
+            `/han/shuffle/${hid}`,
+            { headers }
         );
     } catch (error) {
         return catchError(error)
