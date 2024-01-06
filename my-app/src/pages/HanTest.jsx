@@ -82,6 +82,7 @@ const HanTest = () => {
         <CommonNavbar></CommonNavbar>
 
         <Container>
+            {/* 한자를 클릭하면 해당 한자의 detail page로 이동한다. */}
             <Row onClick={() => navigate(`/detail/${data?.h_info?.id}`)}>
                 <div className="text-center">
                     <h1 style={{fontSize:80}}>{data?.h_info?.hanja}</h1>
