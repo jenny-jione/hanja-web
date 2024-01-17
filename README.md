@@ -61,3 +61,9 @@
 <img width="30%" alt="image" src="https://github.com/jenny-jione/hanja-web/assets/84297915/12f4c5e5-ae14-4c58-b03d-5d47aa4bede8">
 
 
+<br/>
+<br/>
+
+## 🚧 TODO
+2024
+- (1/17) 쿠키 만료 후 재접속시 백에서는 에러를 반환하는데, 프론트에서는 에러 표시 없음. 그래서 화면에 데이터가 비어있는 오류 수정하기.
