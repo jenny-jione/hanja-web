@@ -125,6 +125,7 @@ const HanTest = () => {
                     placeholder="" 
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
+                    autoFocus
                 />
             </Form>
 
