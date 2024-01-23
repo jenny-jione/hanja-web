@@ -16,7 +16,7 @@ function CommonNavbar() {
             <Container>
                 <Navbar.Brand href="/home">홈</Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="/list">목록</Nav.Link>
+                    <Nav.Link href="/list">한자 목록</Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link>{getCookie('userInfo')}</Nav.Link>
