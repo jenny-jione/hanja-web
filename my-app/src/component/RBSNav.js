@@ -11,12 +11,14 @@ import { useNavigate } from 'react-router-dom';
 
 function CommonNavbar() {
     const navigate = useNavigate();
+    const randomNum = Math.floor(Math.random() * 1817) + 1;
     return (
         <Navbar className="justify-content-center" bg="light" data-bs-theme="light">
             <Container>
                 <Navbar.Brand href="/home">홈</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link href="/list">한자 목록</Nav.Link>
+                    <Nav.Link href={`/test/${randomNum}`}>시험</Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link>{getCookie('userInfo')}</Nav.Link>
